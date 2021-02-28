@@ -31,14 +31,6 @@ public class PerfilFragment extends Fragment {
 
         readXML();
 
-        // Money
-        TextView tvMoney = (TextView) view.findViewById(R.id.tvCoins);
-        tvMoney.setText(Integer.toString(Data.mkMoney));
-
-        // Points
-        TextView tvPoints = (TextView) view.findViewById(R.id.tvCoins3);
-        tvPoints.setText(Integer.toString(Data.mkPoints));
-
 
         etServerIP = (EditText) view.findViewById(R.id.etServerIP);
         etServerIP.setText(Data.serverIP);

@@ -7,14 +7,16 @@
     tools:context=".ui.perfil.PerfilFragment">
 
     <Spinner
-        android:id="@+id/spnTotalCourses"
-        android:layout_width="175dp"
-        android:layout_height="50dp"
+        android:id="@+id/spnSelectedCourses"
+        android:layout_width="350dp"
+        android:layout_height="49dp"
         android:layout_below="@id/tvSubtitle"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="130dp"
+        android:layout_marginTop="135dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/spinner_layout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,29 +24,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
-    <Spinner
-        android:id="@+id/spnSelectedCourses"
-        android:layout_width="175dp"
-        android:layout_height="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="130dp"
-        android:layout_marginEnd="20dp"
-        android:layout_toEndOf="@+id/spnTotalCourses"
-        android:background="@drawable/spinner_layout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/spnTotalCourses"
-        app:layout_constraintVertical_bias="0.0" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="597dp"
         android:layout_below="@+id/spnSelectedCourses"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="25dp"
+        android:layout_marginBottom="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

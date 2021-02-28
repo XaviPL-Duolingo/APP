@@ -44,26 +44,22 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
 
         }
 
-        // Spinner con los cursos donde el usuario se ha inscrito, su contenido irá variando a medida
-        // de que el usuario se inscribe a más puntos.
-        final Spinner spnSelectedCourses = (Spinner) view.findViewById(R.id.spnSelectedCourses);
-        spnSelectedCourses.setAdapter(updateAdapter());
 
         // Spinner con todos los cursos disponibles (Cuando haya que utilizar la BBDD en vez de
         // usar ArrayAdapter, habra que usar ClickAdapater [Esta en la guía oficial])
 
-        final Spinner spnTotalCourses  = (Spinner) view.findViewById(R.id.spnTotalCourses);
+        final Spinner spnSelectedCourses  = (Spinner) view.findViewById(R.id.spnSelectedCourses);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, Data.arrayCourses);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnTotalCourses .setAdapter(adapter);
+        spnSelectedCourses .setAdapter(adapter);
 
         // Listener al seleccionar un ITEM en el Spinner spnTotalCourses
-        spnTotalCourses.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spnSelectedCourses.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 // Para conseguir el texto del item seleccionado
-                TextView tv = (TextView)spnTotalCourses.getSelectedView();
+                TextView tv = (TextView)spnSelectedCourses.getSelectedView();
                 String item = tv.getText().toString();
 
                 // Checkea si el item se ha repetido

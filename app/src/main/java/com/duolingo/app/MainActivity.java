@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         createConfigFile();             // Crea la subcarpeta y el fichero XML mediante SINGLETON
-        // irstReadXML();                 // Lee por primera vez el fichero XML y obtiene la IP
+        // firstReadXML();                 // Lee por primera vez el fichero XML y obtiene la IP
         // new Conn().execute();           // Se conecta con el servidor mediante LipeRMI con la IP obtenida
 
         setTheme(R.style.TranslucentStatusBar);     // Fin Splash-Screen
