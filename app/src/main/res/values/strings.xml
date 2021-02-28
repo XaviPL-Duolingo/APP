@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">DuolingoAPP</string>
+    <string name="title_curs">Curs</string>
+    <string name="title_perfil">Perfil</string>
+    <string name="title_lliga">Lliga</string>
+    <string name="title_botiga">Botiga</string>
+    <string name="snack_next">Next</string>
+</resources>

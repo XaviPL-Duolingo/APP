@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundapp"
+    tools:context=".tasks.TipusTestExActivity">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="310dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="40dp"
+        android:progress="60"
+        android:progressDrawable="@drawable/progress_exercice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvStatement"
+        android:layout_width="348dp"
+        android:layout_height="104dp"
+        android:layout_marginTop="160dp"
+        android:fontFamily="@font/duolingo_black"
+        android:gravity="center"
+        android:text="Esta es una frase de ejemplo y el jugador seleccionara la opcion correcta"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btAnswer1"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/answer_layout"
+        android:fontFamily="@font/duolingo_medium"
+        android:text="ANSWER 1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btAnswer2"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="370dp"
+        android:background="@drawable/answer_layout"
+        android:fontFamily="@font/duolingo_medium"
+        android:text="ANSWER 2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btAnswer3"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="440dp"
+        android:background="@drawable/answer_layout"
+        android:fontFamily="@font/duolingo_medium"
+        android:text="ANSWER 3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btCheck"
+        android:layout_width="320dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/next_layout"
+        android:fontFamily="@font/duolingo_medium"
+        android:text="COMPRUEBA"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="259dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="120dp"
+        android:fontFamily="@font/duolingo_medium"
+        android:text="Escoge la opción correcta: "
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

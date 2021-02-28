@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/movie_id"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:layout_width="150dp"
+    android:layout_height="170dp"
+    android:layout_margin="5dp"
+    android:layout_gravity="center"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardElevation="0dp">
+
+        <RelativeLayout
+            android:layout_gravity="center"
+            android:layout_width="150dp"
+            android:layout_height="170dp">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@style/CircularProgressBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:progress="60" />
+
+            <ImageView
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/category_icon"
+                android:scaleType="centerCrop" />
+
+            <ImageView
+                android:id="@+id/rIvCrown"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/rIvIcon"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="-37dp"
+                android:src="@drawable/crown_icon">
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/rTvLevel"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/rIvCrown"
+                android:layout_marginLeft="100dp"
+                android:layout_marginTop="-48dp"
+                android:fontFamily="@font/duolingo_black"
+                android:gravity="center"
+                android:text="1"
+                android:textColor="#000000" />
+
+            <ImageView
+                android:id="@+id/rIvIcon"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="40dp"
+                android:layout_marginEnd="31dp"
+                android:src="@drawable/cats_mk">
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/rTvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="center"
+                android:layout_marginBottom="1dp"
+                android:fontFamily="@font/duolingo_bold"
+                android:gravity="center"
+                android:text="Patata"
+                android:textColor="#FFFFFF" />
+
+        </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

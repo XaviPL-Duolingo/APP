@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.perfil.PerfilFragment">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="54dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/coin" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="53dp"
+        android:layout_height="52dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="316dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.363"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/points" />
+
+    <TextView
+        android:id="@+id/tvCoins"
+        android:layout_width="94dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="84dp"
+        android:layout_toStartOf="@+id/imageView"
+        android:fontFamily="@font/duolingo_bold"
+        android:gravity="center"
+        android:text="1500"
+        android:textAlignment="textEnd"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvCoins3"
+        android:layout_width="94dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="32dp"
+        android:layout_toEndOf="@+id/imageView3"
+        android:fontFamily="@font/duolingo_bold"
+        android:gravity="center"
+        android:text="1500"
+        android:textAlignment="textStart"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvServerIP"
+        android:layout_width="130dp"
+        android:layout_height="32dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="128dp"
+        android:layout_toEndOf="@+id/imageView3"
+        android:fontFamily="@font/duolingo_bold"
+        android:gravity="center"
+        android:text="Server IP:"
+        android:textAlignment="textStart"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="130dp"
+        android:layout_height="32dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="172dp"
+        android:layout_toEndOf="@+id/imageView3"
+        android:fontFamily="@font/duolingo_bold"
+        android:gravity="center"
+        android:text="Username:"
+        android:textAlignment="textStart"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvPassword"
+        android:layout_width="130dp"
+        android:layout_height="32dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="216dp"
+        android:layout_toEndOf="@+id/imageView3"
+        android:fontFamily="@font/duolingo_bold"
+        android:gravity="center"
+        android:text="Password:"
+        android:textAlignment="textStart"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etServerIP"
+        android:layout_width="212dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="128dp"
+        android:background="@null"
+        android:ems="10"
+        android:fontFamily="@font/duolingo_medium"
+        android:inputType="textPersonName"
+        android:text="192.168.1.1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.899"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="213dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="172dp"
+        android:background="@null"
+        android:ems="10"
+        android:fontFamily="@font/duolingo_medium"
+        android:inputType="textPersonName"
+        android:text="Bepo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.898"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="214dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="216dp"
+        android:background="@null"
+        android:ems="10"
+        android:fontFamily="@font/duolingo_medium"
+        android:inputType="textPassword"
+        android:text="qwert123"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.898"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

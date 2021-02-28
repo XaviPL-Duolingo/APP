@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_curs"
+        android:icon="@drawable/coursesicon"
+        android:title="@string/title_curs" />
+
+    <item
+        android:id="@+id/navigation_perfil"
+        android:icon="@drawable/profileicon"
+        android:title="@string/title_perfil" />
+
+    <item
+        android:id="@+id/navigation_lliga"
+        android:icon="@drawable/leaguesicon"
+        android:title="@string/title_lliga" />
+    <item
+        android:id="@+id/navigation_botiga"
+        android:icon="@drawable/shopicon"
+        android:title="@string/title_botiga" />
+
+</menu>
