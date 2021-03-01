@@ -7,70 +7,60 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
-import com.duolingo.app.MainActivity;
 import com.duolingo.app.R;
 import com.duolingo.app.util.Data;
-import com.duolingo.app.util.Encrypter;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 public class PerfilFragment extends Fragment {
 
-    private EditText etServerIP, etUserName, etPassword;
+    private TextView tvUsername, tvMail, tvRanking;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view;
         view = inflater.inflate(R.layout.fragment_perfil, container, false);
 
-        readXML();
+        // readXML();
 
 
-        etServerIP = (EditText) view.findViewById(R.id.etServerIP);
-        etServerIP.setText(Data.serverIP);
-        etServerIP.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        tvUsername = (TextView) view.findViewById(R.id.tvUsername);
+        tvUsername.setText(Data.serverIP);
+        tvUsername.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    writeXML();
+                    // writeXML();
                 }
             }
         });
 
-        etUserName = (EditText) view.findViewById(R.id.etUsername);
-        etUserName.setText(Data.userName);
-        etUserName.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        tvMail = (TextView) view.findViewById(R.id.tvMail);
+        tvMail.setText(Data.userName);
+        tvMail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    writeXML();
+                    // writeXML();
                 }
             }
         });
 
-        etPassword = (EditText) view.findViewById(R.id.etPassword);
-        etPassword.setText(Data.password);
-        etPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        tvRanking = (TextView) view.findViewById(R.id.tvRanking);
+        tvRanking.setText(Data.password);
+        tvRanking.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
-                    writeXML();
+                    // writeXML();
                 }
             }
         });
 
-        writeXML();
+        // writeXML();
 
         return view;
     }
 
-    public void readXML(){
+     /*public void readXML(){
 
         // readXML()
         // Este metodo se encarga de leer el fichero XML "Config.XML" y obtener los valores
@@ -183,6 +173,6 @@ public class PerfilFragment extends Fragment {
 
         return false;
 
-    }
+    } */
 
 }

@@ -28,8 +28,11 @@ android {
     }
 }
 
+
 dependencies {
 
+    implementation project(path: ':LIB')
+    implementation project(path: ':LIB')
     compile group: 'com.tascape.qa', name: 'lipermi', version: '1.0.1'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'

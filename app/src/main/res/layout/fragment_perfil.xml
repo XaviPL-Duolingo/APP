@@ -6,100 +6,113 @@
     android:layout_height="match_parent"
     tools:context=".ui.perfil.PerfilFragment">
 
-    <TextView
-        android:id="@+id/tvServerIP"
-        android:layout_width="130dp"
-        android:layout_height="32dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="128dp"
-        android:layout_toEndOf="@+id/imageView3"
-        android:fontFamily="@font/duolingo_bold"
-        android:gravity="center"
-        android:text="Server IP:"
-        android:textAlignment="textStart"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvUserName"
-        android:layout_width="130dp"
-        android:layout_height="32dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="172dp"
-        android:layout_toEndOf="@+id/imageView3"
-        android:fontFamily="@font/duolingo_bold"
-        android:gravity="center"
-        android:text="Username:"
-        android:textAlignment="textStart"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tvPassword"
-        android:layout_width="130dp"
-        android:layout_height="32dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="216dp"
-        android:layout_toEndOf="@+id/imageView3"
-        android:fontFamily="@font/duolingo_bold"
-        android:gravity="center"
-        android:text="Password:"
-        android:textAlignment="textStart"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/etServerIP"
-        android:layout_width="212dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="128dp"
-        android:background="@null"
-        android:ems="10"
-        android:fontFamily="@font/duolingo_medium"
-        android:inputType="textPersonName"
-        android:text="192.168.1.1"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="325dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/answer_layout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.899"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/etUsername"
-        android:layout_width="213dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="172dp"
-        android:background="@null"
-        android:ems="10"
-        android:fontFamily="@font/duolingo_medium"
-        android:inputType="textPersonName"
-        android:text="Bepo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.898"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:id="@+id/bgRanking"
+        android:layout_width="165dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/subcategory_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/bgMail" />
 
-    <EditText
-        android:id="@+id/etPassword"
-        android:layout_width="214dp"
-        android:layout_height="32dp"
-        android:layout_marginTop="216dp"
-        android:background="@null"
-        android:ems="10"
+    <ImageView
+        android:id="@+id/bgMail"
+        android:layout_width="165dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/subcategory_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+    <ImageView
+        android:id="@+id/bgUsername"
+        android:layout_width="165dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/subcategory_icon"
+        app:layout_constraintBottom_toTopOf="@+id/bgMail"
+        app:layout_constraintEnd_toEndOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+    <ImageView
+        android:id="@+id/iconRanking"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="7dp"
+        android:src="@drawable/league_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/bgRanking"
+        app:layout_constraintStart_toStartOf="@+id/bgRanking"
+        app:layout_constraintTop_toTopOf="@+id/bgRanking" />
+
+    <ImageView
+        android:id="@+id/iconMail"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="7dp"
+        android:src="@drawable/mail_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/bgMail"
+        app:layout_constraintStart_toStartOf="@+id/bgMail"
+        app:layout_constraintTop_toTopOf="@+id/bgMail" />
+
+    <ImageView
+        android:id="@+id/iconUsername"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="7dp"
+        android:src="@drawable/username_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/bgUsername"
+        app:layout_constraintStart_toStartOf="@+id/bgUsername"
+        app:layout_constraintTop_toTopOf="@+id/bgUsername" />
+
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
         android:fontFamily="@font/duolingo_medium"
-        android:inputType="textPassword"
-        android:text="qwert123"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.898"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="#USERNAME"
+        android:textAlignment="viewStart"
+        android:textColor="#F8F6F6"
+        app:layout_constraintBottom_toBottomOf="@+id/bgUsername"
+        app:layout_constraintStart_toEndOf="@+id/iconUsername"
+        app:layout_constraintTop_toTopOf="@+id/bgUsername" />
+
+    <TextView
+        android:id="@+id/tvMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/duolingo_medium"
+        android:text="#EMAIL"
+        android:textAlignment="viewStart"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/bgMail"
+        app:layout_constraintStart_toEndOf="@+id/iconMail"
+        app:layout_constraintTop_toTopOf="@+id/bgMail" />
+
+    <TextView
+        android:id="@+id/tvRanking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:fontFamily="@font/duolingo_medium"
+        android:text="#RANKING"
+        android:textAlignment="viewStart"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="@+id/bgRanking"
+        app:layout_constraintStart_toEndOf="@+id/iconRanking"
+        app:layout_constraintTop_toTopOf="@+id/bgRanking" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

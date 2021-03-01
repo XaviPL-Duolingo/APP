@@ -1,20 +1,15 @@
 package com.duolingo.app;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Looper;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.duolingo.app.model.Course;
 import com.duolingo.app.util.Data;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import net.sf.lipermi.handler.CallHandler;
-import net.sf.lipermi.net.Client;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import java.io.File;
@@ -34,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        createConfigFile();             // Crea la subcarpeta y el fichero XML mediante SINGLETON
+        createConfigFile();                 // Crea la subcarpeta y el fichero XML mediante SINGLETON
         // firstReadXML();                 // Lee por primera vez el fichero XML y obtiene la IP
         // new Conn().execute();           // Se conecta con el servidor mediante LipeRMI con la IP obtenida
 
@@ -87,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /* private void firstReadXML(){
+    private void firstReadXML(){
 
         // readXML()
         // Este metodo se encarga de leer el fichero XML "Config.XML" y obtener los valores
@@ -122,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-    } */
+    }
 
     private void firstWriteXML(){
 
@@ -130,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
         // En caso de no existir el fichero XML, se ejecuta este método que añade las TAGS
         // necesarias sin datos excepto la TAG IP que tendrá la IP con que se ha podido
         // conectar con el servidor si ha sido posible.
+
+        Course course = new Course();
 
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
