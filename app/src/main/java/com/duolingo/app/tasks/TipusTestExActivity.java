@@ -65,9 +65,9 @@ public class TipusTestExActivity extends AppCompatActivity {
         if (getIntent().getExtras() != null){
             Exercice rawData = (Exercice) getIntent().getSerializableExtra("data");
             // String[] rawData = {"Mi gato es negro", "My cat is black", "Black is the cat", "The cat as black"};
-            tvStatement.setText(rawData.getExStatement());
-            arrayAnswers = new String[] {rawData.getWord1(), rawData.getWord2(), rawData.getWord3()};
-            answer = rawData.getWord1();
+            //tvStatement.setText(rawData.getExStatement());
+            //arrayAnswers = new String[] {rawData.getWord1(), rawData.getWord2(), rawData.getWord3()};
+            //answer = rawData.getWord1();
         }
 
     }

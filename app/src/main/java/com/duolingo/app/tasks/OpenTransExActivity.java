@@ -56,8 +56,8 @@ public class OpenTransExActivity extends AppCompatActivity {
 
         if (getIntent().getExtras() != null){
             Exercice rawData = (Exercice) getIntent().getSerializableExtra("data");
-            phrToTranslate = rawData.getExStatement();
-            arraySolutions = rawData.getWord1().split("//");
+            phrToTranslate = "Tomate"; //rawData.getExStatement();
+            arraySolutions = "Alertr//frfr//ftr".split("//"); //rawData.getWord1().split("//");
         }
     }
 

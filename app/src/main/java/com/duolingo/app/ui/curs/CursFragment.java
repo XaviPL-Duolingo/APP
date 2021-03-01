@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.duolingo.app.R;
 import com.duolingo.app.adapter.CategoriesAdapter;
 import com.duolingo.app.model.Category;
+import com.duolingo.app.model.Course;
 import com.duolingo.app.util.Data;
 import com.duolingo.app.util.ExerciceActivity;
 
@@ -49,7 +50,7 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
         // usar ArrayAdapter, habra que usar ClickAdapater [Esta en la guía oficial])
 
         final Spinner spnSelectedCourses  = (Spinner) view.findViewById(R.id.spnSelectedCourses);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, Data.arrayCourses);
+        ArrayAdapter<Course> adapter = new ArrayAdapter<Course>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, Data.listCourses);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnSelectedCourses .setAdapter(adapter);
 
@@ -117,16 +118,7 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
     }
 
     private void initCategories(){
-        mkCategories.add(new Category("Familia", "1", "20"));
-        mkCategories.add(new Category("Animales", "5", "60"));
-        mkCategories.add(new Category("Comidas", "3", "100"));
-        mkCategories.add(new Category("Vehiculos", "0", "0"));
-        mkCategories.add(new Category("Sustantivos", "4", "50"));
-        mkCategories.add(new Category("Verbos", "1", "20"));
-        mkCategories.add(new Category("Presente", "5", "60"));
-        mkCategories.add(new Category("Deporte", "3", "100"));
-        mkCategories.add(new Category("Informatica", "0", "0"));
-        mkCategories.add(new Category("Gramática", "4", "50"));
+
     }
 
     private ArrayAdapter<String> updateAdapter(){
@@ -144,9 +136,9 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
         // En caso de que la conexión con el servidor LipeRMI falle, este metodo instanciaría el
         // ArrayList pero sin valores. Permitiendo asi abrir la app en "MODO OFFLINE"
 
-        if (Data.arrayCourses == null){
+        if (Data.listCourses == null){
             System.out.println("ARRAY NULL");
-            Data.arrayCourses = new ArrayList<>();
+            Data.listCourses = new ArrayList<>();
         }
 
     }

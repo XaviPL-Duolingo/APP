@@ -44,7 +44,7 @@ public class SpinnerAdapter extends ArrayAdapter<Language> {
 
         if (currentItem != null){
             // ivFlag.setImageBitmap(currentItem.getFlag());
-            tvLangName.setText(currentItem.getLamguageName());
+            tvLangName.setText(currentItem.getNameLanguage());
         }
 
         return convertView;

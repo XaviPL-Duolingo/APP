@@ -1,15 +1,18 @@
 package com.duolingo.app;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
-import com.duolingo.app.model.Course;
 import com.duolingo.app.util.Data;
+import com.duolingo.app.util.IServerRMI;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import net.sf.lipermi.handler.CallHandler;
+import net.sf.lipermi.net.Client;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import java.io.File;
@@ -31,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         createConfigFile();                 // Crea la subcarpeta y el fichero XML mediante SINGLETON
         // firstReadXML();                 // Lee por primera vez el fichero XML y obtiene la IP
-        // new Conn().execute();           // Se conecta con el servidor mediante LipeRMI con la IP obtenida
+        new Conn().execute();           // Se conecta con el servidor mediante LipeRMI con la IP obtenida
 
         setTheme(R.style.TranslucentStatusBar);     // Fin Splash-Screen
         super.onCreate(savedInstanceState);
@@ -126,8 +129,6 @@ public class MainActivity extends AppCompatActivity {
         // necesarias sin datos excepto la TAG IP que tendrá la IP con que se ha podido
         // conectar con el servidor si ha sido posible.
 
-        Course course = new Course();
-
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbFactory.newDocumentBuilder();
@@ -175,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-   /*  class Conn extends AsyncTask<Void, Void, MainActivity> {
+    class Conn extends AsyncTask<Void, Void, MainActivity> {
 
         // class Conn
         // Primera conexión con LipeRMI Server, de aqui obtiene la lista de cursos disponibles
@@ -187,12 +188,20 @@ public class MainActivity extends AppCompatActivity {
             try {
                 CallHandler callHandler = new CallHandler();
                 Client client = new Client(Data.serverIP, 7777, callHandler);
-                ITestService testService = (ITestService) client.getGlobal(ITestService.class);
+                IServerRMI serverRMI = (IServerRMI) client.getGlobal(IServerRMI.class);
+
+                System.out.println("llega aki");
 
                 // originLang = Idioma base de la APP
-                // ej. Castellano == ID: 1
-                short mkOriginLang = 51;
-                Data.arrayCourses = testService.getResponse(mkOriginLang);
+                int idOriginLang = 27;
+                try {
+                    Data.listCourses = serverRMI.getAllCoursesByID(idOriginLang);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                System.out.println("i aki tmb jaja");
+
+                System.out.println("PATATAT");
                 client.close();
 
             } catch (IOException e) {
@@ -201,6 +210,6 @@ public class MainActivity extends AppCompatActivity {
             Looper.loop();
             return null;
         }
-    } */
+    }
 
 }

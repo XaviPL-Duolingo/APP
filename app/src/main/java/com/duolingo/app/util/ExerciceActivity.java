@@ -50,10 +50,10 @@ public class ExerciceActivity extends AppCompatActivity {
 
         if (exIndex < arrayExercices.size()){
 
-            int exerciceTypeID = arrayExercices.get(exIndex).getTypeExercice();
+            // int exerciceTypeID = arrayExercices.get(exIndex).getTypeExercice();
             Intent intent;
 
-            switch (exerciceTypeID){
+            /*switch (exerciceTypeID){
                 case 1:
                     intent = new Intent(context, OpenTransExActivity.class);
                     break;
@@ -61,12 +61,12 @@ public class ExerciceActivity extends AppCompatActivity {
                     intent = new Intent(context, TipusTestExActivity.class);
                     break;
                 default:
-                    throw new IllegalStateException("Unexpected value: " + exerciceTypeID);
-            }
+                    // throw new IllegalStateException("Unexpected value: " + exerciceTypeID);
+            }*/
 
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("data", arrayExercices.get(exIndex));
-            context.startActivity(intent);
+            // intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            // intent.putExtra("data", arrayExercices.get(exIndex));
+            // context.startActivity(intent);
             exIndex++;
         }else{
             finishExercice();
@@ -145,10 +145,10 @@ public class ExerciceActivity extends AppCompatActivity {
         // Aqui se crean los 5 ejercicos que se ejecutarán al clicar una categoria
         // Son mockUp.
 
-        arrayExercices.add(new Exercice(1, 7, "Mi gato es negro", "My cat is black", "Black is the cat", "The cat as black"));
+       /* arrayExercices.add(new Exercice(1, 7, "Mi gato es negro", "My cat is black", "Black is the cat", "The cat as black"));
         arrayExercices.add(new Exercice(1, 1, "El esta durmiendo", "He is sleeping//He's sleeping"));
         arrayExercices.add(new Exercice(1, 7, "¡Eso fue increible!", "That was amazing", "This is incredible", "It is amazed"));
         arrayExercices.add(new Exercice(1, 7, "Se cayó y se hizo daño", "He fell and hurt himself", "Went down and died", "Auuuuuuu"));
-        arrayExercices.add(new Exercice(1, 1, "Ella tiene un gato", "She have a cat//She owns a cat//She has a cat"));
+        arrayExercices.add(new Exercice(1, 1, "Ella tiene un gato", "She have a cat//She owns a cat//She has a cat")); */
     }
 }
