@@ -73,7 +73,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<com.duolingo.app.ada
         void bindData(final Category item){
             //ivPhoto.setImageBitmap(item.getImage());
             tvTitle.setText(item.getCategoryName());
-            tvLevel.setText(item.getIdCategory());
+            tvLevel.setText("1");
             progressBar.setProgress(75);
         }
 

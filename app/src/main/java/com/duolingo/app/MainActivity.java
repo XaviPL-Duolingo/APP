@@ -3,13 +3,17 @@ package com.duolingo.app;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Looper;
+import android.os.StrictMode;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import com.duolingo.app.model.Course;
 import com.duolingo.app.util.Data;
-import com.duolingo.app.util.IServerRMI;
+import com.duolingo.app.util.ServerConn;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import net.sf.lipermi.handler.CallHandler;
 import net.sf.lipermi.net.Client;
@@ -17,6 +21,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
@@ -32,9 +38,26 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        createConfigFile();                 // Crea la subcarpeta y el fichero XML mediante SINGLETON
-        // firstReadXML();                 // Lee por primera vez el fichero XML y obtiene la IP
-        new Conn().execute();           // Se conecta con el servidor mediante LipeRMI con la IP obtenida
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        createConfigFile();             // Crea la subcarpeta y el fichero XML mediante SINGLETON
+        // firstReadXML();              // Lee por primera vez el fichero XML y obtiene la IP
+
+        ServerConn serverConn = (ServerConn) new ServerConn("getAllCoursesByID", 27);
+        try {
+            Data.listCourses = (List<Course>) serverConn.returnObject();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // -- HACERLO CON ALGUN THREAD Y LUEGO JOIN PARA QUE ESPERE
 
         setTheme(R.style.TranslucentStatusBar);     // Fin Splash-Screen
         super.onCreate(savedInstanceState);
@@ -174,42 +197,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-    }
-
-    class Conn extends AsyncTask<Void, Void, MainActivity> {
-
-        // class Conn
-        // Primera conexión con LipeRMI Server, de aqui obtiene la lista de cursos disponibles
-        // recibe un ArrayList <String>.
-
-        @Override
-        protected MainActivity doInBackground(Void... voids) {
-            Looper.prepare();
-            try {
-                CallHandler callHandler = new CallHandler();
-                Client client = new Client(Data.serverIP, 7777, callHandler);
-                IServerRMI serverRMI = (IServerRMI) client.getGlobal(IServerRMI.class);
-
-                System.out.println("llega aki");
-
-                // originLang = Idioma base de la APP
-                int idOriginLang = 27;
-                try {
-                    Data.listCourses = serverRMI.getAllCoursesByID(idOriginLang);
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
-                System.out.println("i aki tmb jaja");
-
-                System.out.println("PATATAT");
-                client.close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Looper.loop();
-            return null;
-        }
     }
 
 }

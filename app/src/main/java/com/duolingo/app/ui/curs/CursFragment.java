@@ -21,21 +21,24 @@ import com.duolingo.app.model.Category;
 import com.duolingo.app.model.Course;
 import com.duolingo.app.util.Data;
 import com.duolingo.app.util.ExerciceActivity;
+import com.duolingo.app.util.ServerConn;
 
+import java.nio.channels.MembershipKey;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteListener{
 
     private static ArrayList<String> listSelectedCourses = new ArrayList<String>();
-    private ArrayList<Category> mkCategories = new ArrayList<Category>();
+    private List<Category> mkCategories = new ArrayList<Category>();
+    private Spinner spnSelectedCourses;
+
+    public int idCourse;
 
     public View onCreateView(LayoutInflater inflater,ViewGroup container, Bundle savedInstanceState){
 
         View view;
         view = inflater.inflate(R.layout.fragment_curs, container, false);
-
-        checkCourses();
-
         TextView tvTitle = (TextView) view.findViewById(R.id.tvTitle);
 
         if (Data.userName.isEmpty()){
@@ -45,37 +48,33 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
 
         }
 
+        // checkCourses();
+
 
         // Spinner con todos los cursos disponibles (Cuando haya que utilizar la BBDD en vez de
         // usar ArrayAdapter, habra que usar ClickAdapater [Esta en la guía oficial])
 
-        final Spinner spnSelectedCourses  = (Spinner) view.findViewById(R.id.spnSelectedCourses);
+        spnSelectedCourses  = (Spinner) view.findViewById(R.id.spnSelectedCourses);
+
         ArrayAdapter<Course> adapter = new ArrayAdapter<Course>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, Data.listCourses);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spnSelectedCourses .setAdapter(adapter);
+        spnSelectedCourses.setAdapter(adapter);
 
-        // Listener al seleccionar un ITEM en el Spinner spnTotalCourses
         spnSelectedCourses.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                // Para conseguir el texto del item seleccionado
-                TextView tv = (TextView)spnSelectedCourses.getSelectedView();
-                String item = tv.getText().toString();
-
-                // Checkea si el item se ha repetido
-                boolean repeated = false;
-                for (String s: listSelectedCourses){
-                    if (s.equals(item)){
-                        repeated = true;
+                Course courseSelected = (Course) parent.getSelectedItem();
+                idCourse = courseSelected.getIdCourse();
+                mkCategories.clear();
+                try {
+                    ServerConn serverConn = (ServerConn) new ServerConn("getAllCategoriesByID", idCourse);
+                    List<Category> categoryList = (List<Category>) serverConn.returnObject();
+                    for (Category cat : categoryList) {
+                        mkCategories.add(cat);
                     }
-                }
 
-                if (!repeated){
-                    // Si es la primera vez que se selecciona el curso, este se añade al ArrayList
-                    // donde se guardan los cursos donde se ha inscrito el usuario
-                    listSelectedCourses.add(item);
-                    spnSelectedCourses.setAdapter(updateAdapter());
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
             }
 
@@ -87,7 +86,6 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
 
         // RecyclerView
         // Se crea e instancia la RecyclerView, luego se crea su respectivo adapter
-        initCategories();
         RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
         CategoriesAdapter listAdapter = new CategoriesAdapter(mkCategories, getActivity().getApplicationContext(), this);
 
@@ -115,10 +113,6 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
         mkCategories.get(position);
         Intent intent = new Intent(getContext(), ExerciceActivity.class);
         startActivity(intent);
-    }
-
-    private void initCategories(){
-
     }
 
     private ArrayAdapter<String> updateAdapter(){
