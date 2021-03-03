@@ -6,20 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".ui.perfil.PerfilFragment">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="95dp"
+        android:layout_height="95dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="250dp"
+        app:layout_constraintBottom_toTopOf="@+id/spnLanguages"
+        app:layout_constraintEnd_toStartOf="@+id/bgMail"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/button">
+
+    </androidx.cardview.widget.CardView>
+
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="325dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="50dp"
+        android:layout_width="0dp"
+        android:layout_height="220dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
         android:src="@drawable/answer_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tagDashboard" />
 
     <ImageView
         android:id="@+id/bgRanking"
         android:layout_width="165dp"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="20dp"
         android:src="@drawable/subcategory_icon"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -29,7 +43,7 @@
     <ImageView
         android:id="@+id/bgMail"
         android:layout_width="165dp"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="20dp"
         android:src="@drawable/subcategory_icon"
         app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -39,7 +53,7 @@
     <ImageView
         android:id="@+id/bgUsername"
         android:layout_width="165dp"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
         android:layout_marginEnd="20dp"
         android:src="@drawable/subcategory_icon"
         app:layout_constraintBottom_toTopOf="@+id/bgMail"
@@ -114,5 +128,82 @@
         app:layout_constraintBottom_toBottomOf="@+id/bgRanking"
         app:layout_constraintStart_toEndOf="@+id/iconRanking"
         app:layout_constraintTop_toTopOf="@+id/bgRanking" />
+
+    <TextView
+        android:id="@+id/tagDashboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/duolingo_bold"
+        android:text="DASHBOARD"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/next_layout"
+        android:text="CAMBIAR"
+        android:textAlignment="center"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/bgUsername"
+        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+    <Spinner
+        android:spinnerMode="dialog"
+        android:id="@+id/spnLanguages"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/spinner_layout"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toStartOf="@+id/bgRanking"
+        app:layout_constraintStart_toStartOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/btnFollows"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/next_layout"
+        android:text="FOLLOWS: #0"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <Button
+        android:id="@+id/btnFollows2"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="35dp"
+        android:background="@drawable/next_layout"
+        android:text="FOLLOWERS: #0"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+    <TextView
+        android:id="@+id/tagSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/duolingo_bold"
+        android:text="AJUSTES"
+        android:textAlignment="textStart"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnFollows" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

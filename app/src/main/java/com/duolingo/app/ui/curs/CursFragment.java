@@ -48,34 +48,23 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
 
         }
 
-        // checkCourses();
+        checkCourses();
 
 
         // Spinner con todos los cursos disponibles (Cuando haya que utilizar la BBDD en vez de
         // usar ArrayAdapter, habra que usar ClickAdapater [Esta en la guía oficial])
 
         spnSelectedCourses  = (Spinner) view.findViewById(R.id.spnSelectedCourses);
-
         ArrayAdapter<Course> adapter = new ArrayAdapter<Course>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, Data.listCourses);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnSelectedCourses.setAdapter(adapter);
-
+        updateCategories();
+        spnSelectedCourses.setSelection(Data.selectedCourse);
         spnSelectedCourses.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Course courseSelected = (Course) parent.getSelectedItem();
-                idCourse = courseSelected.getIdCourse();
-                mkCategories.clear();
-                try {
-                    ServerConn serverConn = (ServerConn) new ServerConn("getAllCategoriesByID", idCourse);
-                    List<Category> categoryList = (List<Category>) serverConn.returnObject();
-                    for (Category cat : categoryList) {
-                        mkCategories.add(cat);
-                    }
-
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+                updateCategories();
             }
 
             @Override
@@ -133,6 +122,25 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
         if (Data.listCourses == null){
             System.out.println("ARRAY NULL");
             Data.listCourses = new ArrayList<>();
+        }
+
+    }
+
+    private void updateCategories(){
+
+        Course courseSelected = (Course) spnSelectedCourses.getSelectedItem();
+        idCourse = courseSelected.getIdCourse();
+        mkCategories.clear();
+
+        try {
+            ServerConn serverConn = (ServerConn) new ServerConn("getAllCategoriesByID", idCourse);
+            List<Category> categoryList = (List<Category>) serverConn.returnObject();
+            for (Category cat : categoryList) {
+                mkCategories.add(cat);
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
     }

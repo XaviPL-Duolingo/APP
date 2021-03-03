@@ -1,34 +1,26 @@
 package com.duolingo.app;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Looper;
 import android.os.StrictMode;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-
 import com.duolingo.app.model.Course;
 import com.duolingo.app.util.Data;
 import com.duolingo.app.util.ServerConn;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import net.sf.lipermi.handler.CallHandler;
-import net.sf.lipermi.net.Client;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 import java.util.List;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,18 +33,18 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        createConfigFile();             // Crea la subcarpeta y el fichero XML mediante SINGLETON
-        // firstReadXML();              // Lee por primera vez el fichero XML y obtiene la IP
+        createConfigFile();
+        firstReadJSON();
 
-        ServerConn serverConn = (ServerConn) new ServerConn("getAllCoursesByID", 27);
+        // Aqui tiene que leer el JSON, antes de la conn con server
+
         try {
+            ServerConn serverConn = (ServerConn) new ServerConn("getAllCoursesByID", 27);
             Data.listCourses = (List<Course>) serverConn.returnObject();
+            Thread.sleep(1000);
+
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        try {
-            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -71,13 +63,13 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
     }
 
-    private File xmlSingleton() throws IOException {
+    private File jsonSingleton() {
 
         // xmlSingleton()
         // Singleton.
 
         if (filename == null) {
-            filename = new File(folder, "Config.xml");
+            filename = new File(folder, "config.json");
         }
 
         return filename;
@@ -97,10 +89,10 @@ public class MainActivity extends AppCompatActivity {
                 folder.mkdirs();
             }
 
-            filename = xmlSingleton();
+            filename = jsonSingleton();
             if (!filename.exists()){
                 filename.createNewFile();
-                firstWriteXML();
+                firstWriteJSON();
             }
 
         }catch (Exception e){
@@ -108,93 +100,60 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void firstReadXML(){
+    private void firstWriteJSON(){
 
-        // readXML()
-        // Este metodo se encarga de leer el fichero XML "Config.XML" y obtener los valores
-        // introducidos en este para después guardarlos en la APP.
+        // firstWriteJSON()
+        // Este método crea el .JSON con los datos necesarios para la aplicación pero sin información.
 
         if (filename.exists()){
             try {
-                DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder db = dbFactory.newDocumentBuilder();
-                Document dom  = db.parse(filename);
+                JSONObject fileJSON = new JSONObject();
+                fileJSON.put("server_ip", "192.168.1.212");
+                fileJSON.put("user_language", "0");
+                fileJSON.put("selected_course", "0");
 
-                // En caso de no haber IP en el XML, obtiene la IP por defecto establecida en Data
-                String tempIP = dom.getElementsByTagName("ip").item(0).getTextContent();
-                if (!tempIP.isEmpty()){
-                    Data.serverIP = tempIP;
-                }
+                // Parsear a formato JSON y escribir en config.json
 
-                String tempUsername =  dom.getElementsByTagName("username").item(0).getTextContent();
-                if (!tempUsername.isEmpty()){
-                    Data.userName = tempUsername;
-                }
+                Writer saveFile = new BufferedWriter(new FileWriter(filename));
+                saveFile.write(fileJSON.toString(4));
+                saveFile.close();
+                System.out.println(fileJSON.toString(4));
 
-                String tempPass = dom.getElementsByTagName("password").item(0).getTextContent();
-                if (!tempPass.isEmpty()){
-                    Data.password = tempPass;
-                }
 
-                Data.mkMoney = Integer.parseInt(dom.getElementsByTagName("money").item(0).getTextContent());
-                Data.mkPoints = Integer.parseInt(dom.getElementsByTagName("points").item(0).getTextContent());
-
-            }catch (Exception e){
+            } catch (JSONException | IOException e) {
                 e.printStackTrace();
             }
+        }else {
+            System.out.println("[DEBUG] - El fichero [config.json] NO existe...");
         }
+
     }
 
-    private void firstWriteXML(){
+    private void firstReadJSON(){
 
-        // firstWriteXML()
-        // En caso de no existir el fichero XML, se ejecuta este método que añade las TAGS
-        // necesarias sin datos excepto la TAG IP que tendrá la IP con que se ha podido
-        // conectar con el servidor si ha sido posible.
+        if (filename.exists()){
+            try {
 
-        try {
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = dbFactory.newDocumentBuilder();
-            Document doc = db.newDocument();
+                FileReader fileReader = new FileReader(filename);
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+                StringBuilder stringBuilder = new StringBuilder();
+                String line = bufferedReader.readLine();
+                while (line != null){
+                    stringBuilder.append(line).append("\n");
+                    line = bufferedReader.readLine();
+                }
+                bufferedReader.close();
+                String fileParsed = stringBuilder.toString();
 
-            // TAG ROOT = CONFIG
-            Element eRoot = doc.createElement("config");
-            doc.appendChild(eRoot);
+                JSONObject fileJSON = new JSONObject(fileParsed);
+                Data.serverIP = (String) fileJSON.get("server_ip");
+                Data.selectedLanguage = fileJSON.getInt("user_language");
+                Data.selectedCourse = fileJSON.getInt("selected_course");
 
-            // TAG SERVERIP
-            Element eIP = doc.createElement("ip");
-            eIP.appendChild(doc.createTextNode(Data.serverIP));
-            eRoot.appendChild(eIP);
 
-            // TAG USERNAME
-            Element eUsername = doc.createElement("username");
-            eRoot.appendChild(eUsername);
-
-            // TAG PASSWORD
-            Element ePassword = doc.createElement("password");
-            eRoot.appendChild(ePassword);
-
-            // TAG MONEY
-            Element eMoney = doc.createElement("money");
-            eRoot.appendChild(eMoney);
-
-            // TAG POINTS
-            Element ePoints = doc.createElement("points");
-            eRoot.appendChild(ePoints);
-
-            // Transforma los Element i el Document a un fichero XML y lo guarda
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource source = new DOMSource(doc);
-            StreamResult result = new StreamResult(MainActivity.filename);
-
-            transformer.transform(source, result);
-            System.out.println("Nuevo fichero creado correctamente: ["+MainActivity.filename.getName()+"]");
-            System.out.println("Guardando fichero en: ["+MainActivity.filename.getAbsolutePath()+"]");
-
-        }catch (Exception e){
-            System.out.println("ERROR - No se ha podido crear: ["+MainActivity.filename.getName()+"]");
-            e.printStackTrace();
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+            }
         }
 
     }
