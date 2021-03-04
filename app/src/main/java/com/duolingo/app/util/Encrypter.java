@@ -1,6 +1,7 @@
 package com.duolingo.app.util;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
@@ -61,6 +62,27 @@ public class Encrypter {
         {
             System.out.println("Error while decrypting: " + e.toString());
         }
+        return null;
+    }
+
+    public static String getMD5(String input){
+
+        try {
+
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] messageDigest = md.digest(input.getBytes());
+            BigInteger no = new BigInteger(1, messageDigest);
+            String hashText = no.toString(16);
+            while (hashText.length() < 32){
+                hashText = "0" + hashText;
+            }
+
+            return hashText;
+
+        }catch (Exception e){
+            System.out.println("[DEBUG] - Error al encriptar: [getMD5()]");
+        }
+
         return null;
     }
 }

@@ -1,11 +1,13 @@
 package com.duolingo.app.ui.perfil;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -42,6 +44,15 @@ public class PerfilFragment extends Fragment {
         // TextView = ranking
         tvRanking = (TextView) view.findViewById(R.id.tvRanking);
         tvRanking.setText(ranking);
+
+        final Button btnLogin = view.findViewById(R.id.btnGotoLogin);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
         getAllLanguages();
         Spinner spnLanguages = (Spinner) view.findViewById(R.id.spnLanguages);

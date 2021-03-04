@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class ServerConn {
@@ -35,6 +36,22 @@ public class ServerConn {
             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
             dos.writeUTF(clientOption);
             dos.writeInt(parameters);
+            // returnObject();
+        } catch (IOException e) {
+            System.out.println("[SERVER] - Imposible conectar con el servidor...");
+            e.printStackTrace();
+        }
+    }
+
+    public ServerConn(String clientOption, String param1, String param2){
+
+        try {
+            socket = new Socket(Data.serverIP, 25012);
+            System.out.println("[SERVER] - Conexión establecida!");
+            DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+            dos.writeUTF(clientOption);
+            dos.writeUTF(param1);
+            dos.writeUTF(param2);
             // returnObject();
         } catch (IOException e) {
             System.out.println("[SERVER] - Imposible conectar con el servidor...");
