@@ -18,7 +18,10 @@ public class Data {
     public static int mkMoney = 0;      // Borrar
     public static int mkPoints = 0;     // Borrar
 
+    public static String KEYID_USER = "";
+    public static boolean hasConnection = false;
+
     public static List<Course> listCourses;
-    public static int idOriginLang;
+    public static int idOriginLang = 1;
 
 }

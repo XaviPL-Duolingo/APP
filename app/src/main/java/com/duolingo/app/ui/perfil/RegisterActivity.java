@@ -37,6 +37,15 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        final Button btnLogin = findViewById(R.id.btnGotoLogin);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                gotoLogin();
+                finish();
+            }
+        });
+
     }
 
     private void gotoLogin(){
@@ -68,7 +77,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             if (success){
                 Toast.makeText(this, "Te has registrado correctamente!", Toast.LENGTH_SHORT).show();
-                gotoLogin();
+                finish();
             }else {
                 Toast.makeText(this, "Fallo al registrar usuario...", Toast.LENGTH_SHORT).show();
 

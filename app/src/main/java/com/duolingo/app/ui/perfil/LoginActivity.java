@@ -3,6 +3,7 @@ package com.duolingo.app.ui.perfil;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 gotoRegister();
+                finish();
             }
         });
 
@@ -83,7 +85,16 @@ public class LoginActivity extends AppCompatActivity {
             boolean success = (boolean) serverConn.returnObject();
 
             if (success){
+
+                // Guarda el identificador del usuario en SharedPreferences
                 Toast.makeText(this, "Inicio de sesion correcto!", Toast.LENGTH_SHORT).show();
+
+                SharedPreferences sharedPreferences = getSharedPreferences("userData", getApplicationContext().MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("KEYID_USER", username);
+                editor.apply();
+                finish();
+
             }else {
                 Toast.makeText(this, "Inicio de sesion incorrecto...", Toast.LENGTH_SHORT).show();
 

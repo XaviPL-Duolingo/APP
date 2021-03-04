@@ -32,10 +32,10 @@ public class PerfilFragment extends Fragment {
 
         // TextView = userName
         tvUsername = (TextView) view.findViewById(R.id.tvUsername);
-        tvUsername.setText(userName);
+        tvUsername.setText(Data.KEYID_USER);
 
         // TextView = email
-        tvMail = (TextView) view.findViewById(R.id.tvMail);
+        tvMail = (TextView) view.findViewById(R.id.tvEmail);
         tvMail.setText(email);
 
         // TextView = ranking
@@ -56,7 +56,7 @@ public class PerfilFragment extends Fragment {
         ArrayAdapter<Language> adapter = new ArrayAdapter<Language>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, languageArrayList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnLanguages.setAdapter(adapter);
-        spnLanguages.setSelection(Data.selectedLanguage);
+        spnLanguages.setSelection(Data.idOriginLang - 1);
         spnLanguages.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

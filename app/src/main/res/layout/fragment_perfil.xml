@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,215 +7,244 @@
     tools:context=".ui.perfil.PerfilFragment">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="95dp"
-        android:layout_height="95dp"
-        android:layout_gravity="center"
-        app:cardCornerRadius="250dp"
-        app:layout_constraintBottom_toTopOf="@+id/spnLanguages"
-        app:layout_constraintEnd_toStartOf="@+id/bgMail"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/button">
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="25dp"
+        app:cardBackgroundColor="#27223D"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="0dp"
+        app:contentPadding="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".40"
+                    android:orientation="vertical"
+                    android:padding="15dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        app:cardCornerRadius="90dp"
+                        app:cardElevation="0dp">
+
+                        <ImageView
+                            android:id="@+id/ivAvatar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            tools:src="@drawable/username_icon" />
+                    </androidx.cardview.widget.CardView>
+
+                    <Spinner
+                        android:id="@+id/spnLanguages"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/spinner_layout"
+                        android:spinnerMode="dialog" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".60"
+                    android:orientation="vertical">
+
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="12dp"
+                        app:cardBackgroundColor="#1C142E"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="0dp"
+                        app:contentPadding="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageView6"
+                                android:layout_width="30dp"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/username_icon" />
+
+                            <TextView
+                                android:id="@+id/tvUsername"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/duolingo_medium"
+                                android:gravity="center_vertical"
+                                android:text="#USERNAME"
+                                android:textAlignment="viewStart" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="15dp"
+                        app:cardBackgroundColor="#1C142E"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="0dp"
+                        app:contentPadding="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageView7"
+                                android:layout_width="30dp"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/mail_icon" />
+
+                            <TextView
+                                android:id="@+id/tvEmail"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/duolingo_medium"
+                                android:gravity="center_vertical"
+                                android:text="#EMAIL"
+                                android:textAlignment="viewStart" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="15dp"
+                        app:cardBackgroundColor="#1C142E"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="0dp"
+                        app:contentPadding="5dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="left"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageView8"
+                                android:layout_width="30dp"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/league_icon" />
+
+                            <TextView
+                                android:id="@+id/tvRanking"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="5dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/duolingo_medium"
+                                android:gravity="center_vertical"
+                                android:text="#RANKING"
+                                android:textAlignment="viewStart" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="220dp"
-        android:layout_marginStart="15dp"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/cardView"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="15dp"
-        android:src="@drawable/answer_layout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tagDashboard" />
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingStart="25dp"
+        android:paddingEnd="25dp"
+        app:layout_constraintTop_toBottomOf="@+id/cardView">
 
-    <ImageView
-        android:id="@+id/bgRanking"
-        android:layout_width="165dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="20dp"
-        android:src="@drawable/subcategory_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/bgMail" />
+        <Button
+            android:id="@+id/btnFollows"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/next_layout"
+            android:text="FOLLOWS: #0"
+            android:textAlignment="center" />
 
-    <ImageView
-        android:id="@+id/bgMail"
-        android:layout_width="165dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="20dp"
-        android:src="@drawable/subcategory_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        <Button
+            android:id="@+id/btnFollowers"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/next_layout"
+            android:text="FOLLOWERS: #0"
+            android:textAlignment="center" />
 
-    <ImageView
-        android:id="@+id/bgUsername"
-        android:layout_width="165dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="20dp"
-        android:src="@drawable/subcategory_icon"
-        app:layout_constraintBottom_toTopOf="@+id/bgMail"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
-
-    <ImageView
-        android:id="@+id/iconRanking"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="7dp"
-        android:src="@drawable/league_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/bgRanking"
-        app:layout_constraintStart_toStartOf="@+id/bgRanking"
-        app:layout_constraintTop_toTopOf="@+id/bgRanking" />
-
-    <ImageView
-        android:id="@+id/iconMail"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="7dp"
-        android:src="@drawable/mail_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/bgMail"
-        app:layout_constraintStart_toStartOf="@+id/bgMail"
-        app:layout_constraintTop_toTopOf="@+id/bgMail" />
-
-    <ImageView
-        android:id="@+id/iconUsername"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="7dp"
-        android:src="@drawable/username_icon"
-        app:layout_constraintBottom_toBottomOf="@+id/bgUsername"
-        app:layout_constraintStart_toStartOf="@+id/bgUsername"
-        app:layout_constraintTop_toTopOf="@+id/bgUsername" />
-
-    <TextView
-        android:id="@+id/tvUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:fontFamily="@font/duolingo_medium"
-        android:text="#USERNAME"
-        android:textAlignment="viewStart"
-        android:textColor="#F8F6F6"
-        app:layout_constraintBottom_toBottomOf="@+id/bgUsername"
-        app:layout_constraintStart_toEndOf="@+id/iconUsername"
-        app:layout_constraintTop_toTopOf="@+id/bgUsername" />
-
-    <TextView
-        android:id="@+id/tvMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:fontFamily="@font/duolingo_medium"
-        android:text="#EMAIL"
-        android:textAlignment="viewStart"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/bgMail"
-        app:layout_constraintStart_toEndOf="@+id/iconMail"
-        app:layout_constraintTop_toTopOf="@+id/bgMail" />
-
-    <TextView
-        android:id="@+id/tvRanking"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:fontFamily="@font/duolingo_medium"
-        android:text="#RANKING"
-        android:textAlignment="viewStart"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/bgRanking"
-        app:layout_constraintStart_toEndOf="@+id/iconRanking"
-        app:layout_constraintTop_toTopOf="@+id/bgRanking" />
-
-    <TextView
-        android:id="@+id/tagDashboard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:fontFamily="@font/duolingo_bold"
-        android:text="DASHBOARD"
-        android:textAlignment="center"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/button"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/next_layout"
-        android:text="CAMBIAR"
-        android:textAlignment="center"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/bgUsername"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
-
-    <Spinner
-        android:id="@+id/spnLanguages"
-        android:layout_width="0dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/spinner_layout"
-        android:spinnerMode="dialog"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toStartOf="@+id/bgRanking"
-        app:layout_constraintStart_toStartOf="@+id/imageView" />
-
-    <Button
-        android:id="@+id/btnFollows"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/next_layout"
-        android:text="FOLLOWS: #0"
-        android:textAlignment="center"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-    <Button
-        android:id="@+id/btnFollows2"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="35dp"
-        android:background="@drawable/next_layout"
-        android:text="FOLLOWERS: #0"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tagSettings"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
         android:fontFamily="@font/duolingo_bold"
+        android:gravity="center"
         android:text="AJUSTES"
-        android:textAlignment="textStart"
+        android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnFollows" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <Button
         android:id="@+id/btnTestLogin"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_below="@+id/tagSettings"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="25dp"
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnFollows" />
+        app:layout_constraintTop_toBottomOf="@+id/tagSettings" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

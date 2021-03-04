@@ -1,5 +1,6 @@
 package com.duolingo.app;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +9,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import com.duolingo.app.model.Course;
+import com.duolingo.app.model.User;
 import com.duolingo.app.util.Data;
 import com.duolingo.app.util.ServerConn;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,24 +32,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-
-        createConfigFile();
-        firstReadJSON();
-
-        // Aqui tiene que leer el JSON, antes de la conn con server
-
-        try {
-            ServerConn serverConn = (ServerConn) new ServerConn("getAllCoursesByID", 27);
-            Data.listCourses = (List<Course>) serverConn.returnObject();
-            Thread.sleep(1000);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        getPreferences();
 
         // -- HACERLO CON ALGUN THREAD Y LUEGO JOIN PARA QUE ESPERE
 
@@ -61,6 +46,56 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navView, navController);
+    }
+
+    private void getPreferences(){
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        createConfigFile();
+        firstReadJSON();
+
+        SharedPreferences sharedPreferences = getSharedPreferences("userData", getApplicationContext().MODE_PRIVATE);
+        Data.KEYID_USER = sharedPreferences.getString("KEYID_USER", "null");
+
+        getUserData();
+
+        try {
+            ServerConn serverConn = (ServerConn) new ServerConn("getAllCoursesByID", Data.idOriginLang);
+            Data.listCourses = (List<Course>) serverConn.returnObject();
+            Thread.sleep(1000);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void getUserData(){
+
+        // getUserData()
+        // A partir de la clave KEYID_USER se sabe si hay una sesión iniciada o no
+        // Si la hay se conecta al servidor y se obtienen los datos del usuario.
+
+        if (Data.KEYID_USER == null){
+            Data.hasConnection = false;
+        }else {
+            Data.hasConnection = true;
+            try {
+                ServerConn serverConn = (ServerConn) new ServerConn("getUserData", Data.KEYID_USER);
+                User userObj = (User) serverConn.returnObject();
+                Data.idOriginLang = userObj.getIdOriginLang().getIdLanguage();
+            }catch (Exception e){
+                System.out.println("[SERVER] - Error al obtener datos del servidor...");
+                e.printStackTrace();
+            }
+        }
+
+
+
     }
 
     private File jsonSingleton() {

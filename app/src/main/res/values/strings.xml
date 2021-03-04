@@ -5,6 +5,7 @@
     <string name="title_lliga">Lliga</string>
     <string name="title_botiga">Botiga</string>
     <string name="snack_next">Next</string>
+    <string name="keyid_user">KEYID_USER</string>;
     <string name="title_activity_login">LoginActivity</string>
     <!--
     This string is used for square devices and overridden by hello_world in
