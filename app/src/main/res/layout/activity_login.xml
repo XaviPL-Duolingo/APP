@@ -34,14 +34,16 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
         <Button
-            android:id="@+id/btnRegister"
+            android:id="@+id/btnGotoRegister"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="0dp"
             android:layout_marginTop="240dp"
             android:layout_marginEnd="0dp"
             android:background="@drawable/next_layout"
-            android:text="REGISTRATE" />
+            android:fontFamily="@font/duolingo_bold"
+            android:text="REGISTRATE"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/btnLogin"
@@ -51,7 +53,9 @@
             android:layout_marginTop="175dp"
             android:layout_marginEnd="0dp"
             android:background="@drawable/next_layout"
-            android:text="CONECTAR" />
+            android:fontFamily="@font/duolingo_bold"
+            android:text="CONECTAR"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/etUsername"
@@ -68,7 +72,7 @@
             android:inputType="textPersonName" />
 
         <EditText
-            android:id="@+id/etPassword"
+            android:id="@+id/etEmail"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginStart="0dp"
@@ -76,8 +80,10 @@
             android:layout_marginEnd="0dp"
             android:background="@drawable/subcategory_icon"
             android:ems="10"
+            android:fontFamily="@font/duolingo_medium"
             android:hint="#PASSWORD"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/tagLogin"

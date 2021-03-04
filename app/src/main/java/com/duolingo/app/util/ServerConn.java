@@ -43,6 +43,27 @@ public class ServerConn {
         }
     }
 
+    public ServerConn(String clientOption, String param1, String param2, String param3, int param4){
+
+        try {
+            socket = new Socket(Data.serverIP, 25012);
+            System.out.println("[SERVER] - Conexión establecida!");
+            DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+            dos.writeUTF(clientOption);
+            dos.writeUTF(param1);
+            dos.writeUTF(param2);
+            dos.writeUTF(param3);
+            dos.writeInt(param4);
+            // returnObject();
+        } catch (IOException e) {
+            System.out.println("[SERVER] - Imposible conectar con el servidor...");
+            e.printStackTrace();
+        }
+    }
+
+
+
+
     public ServerConn(String clientOption, String param1, String param2){
 
         try {

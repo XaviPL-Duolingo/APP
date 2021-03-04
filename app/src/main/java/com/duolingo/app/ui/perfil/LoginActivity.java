@@ -7,17 +7,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.duolingo.app.R;
-import com.duolingo.app.model.Course;
-import com.duolingo.app.util.Data;
 import com.duolingo.app.util.Encrypter;
 import com.duolingo.app.util.ServerConn;
 
 import java.io.IOException;
-import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -29,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         etUsername = findViewById(R.id.etUsername);
-        etPassword = findViewById(R.id.etPassword);
+        etPassword = findViewById(R.id.etEmail);
 
         Button btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -39,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Button btnRegister = findViewById(R.id.btnRegister);
+        Button btnRegister = findViewById(R.id.btnGotoRegister);
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,7 +79,6 @@ public class LoginActivity extends AppCompatActivity {
         // Manda la solicitud al servidor y cominica al usuario si es correcta o no.
 
         try {
-            System.out.println(pass);
             ServerConn serverConn = (ServerConn) new ServerConn("loginUser", username, pass);
             boolean success = (boolean) serverConn.returnObject();
 

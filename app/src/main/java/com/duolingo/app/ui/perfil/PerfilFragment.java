@@ -8,13 +8,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import com.duolingo.app.R;
-import com.duolingo.app.model.Category;
-import com.duolingo.app.model.Course;
 import com.duolingo.app.model.Language;
 import com.duolingo.app.util.Data;
 import com.duolingo.app.util.ServerConn;
@@ -45,7 +42,7 @@ public class PerfilFragment extends Fragment {
         tvRanking = (TextView) view.findViewById(R.id.tvRanking);
         tvRanking.setText(ranking);
 
-        final Button btnLogin = view.findViewById(R.id.btnGotoLogin);
+        final Button btnLogin = view.findViewById(R.id.btnTestLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
