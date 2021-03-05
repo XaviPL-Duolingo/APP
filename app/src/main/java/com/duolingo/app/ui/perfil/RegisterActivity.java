@@ -72,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
     private void registerUser(String username, String email, String password){
 
         try {
-            ServerConn serverConn = (ServerConn) new ServerConn("registerUser", username, email, password, Data.selectedLanguage);
+            ServerConn serverConn = (ServerConn) new ServerConn("registerUser", username, email, password, Data.KEYID_LANG);
             boolean success = (boolean) serverConn.returnObject();
 
             if (success){

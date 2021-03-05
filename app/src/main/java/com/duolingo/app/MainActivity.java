@@ -58,19 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("userData", getApplicationContext().MODE_PRIVATE);
         Data.KEYID_USER = sharedPreferences.getString("KEYID_USER", "null");
+        Data.KEYID_LANG = sharedPreferences.getInt("KEYID_LANG", 0);
 
         getUserData();
-
-        try {
-            ServerConn serverConn = (ServerConn) new ServerConn("getAllCoursesByID", Data.idOriginLang);
-            Data.listCourses = (List<Course>) serverConn.returnObject();
-            Thread.sleep(1000);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
     }
 
@@ -87,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
             try {
                 ServerConn serverConn = (ServerConn) new ServerConn("getUserData", Data.KEYID_USER);
                 User userObj = (User) serverConn.returnObject();
-                Data.idOriginLang = userObj.getIdOriginLang().getIdLanguage();
             }catch (Exception e){
                 System.out.println("[SERVER] - Error al obtener datos del servidor...");
                 e.printStackTrace();
@@ -182,8 +171,9 @@ public class MainActivity extends AppCompatActivity {
 
                 JSONObject fileJSON = new JSONObject(fileParsed);
                 Data.serverIP = (String) fileJSON.get("server_ip");
-                Data.selectedLanguage = fileJSON.getInt("user_language");
                 Data.selectedCourse = fileJSON.getInt("selected_course");
+
+                Data.selectedCourse = 0;
 
 
             } catch (IOException | JSONException e) {

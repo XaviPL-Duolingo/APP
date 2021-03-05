@@ -23,6 +23,7 @@ import com.duolingo.app.util.Data;
 import com.duolingo.app.util.ExerciceActivity;
 import com.duolingo.app.util.ServerConn;
 
+import java.io.IOException;
 import java.nio.channels.MembershipKey;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,7 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
     private static ArrayList<String> listSelectedCourses = new ArrayList<String>();
     private List<Category> mkCategories = new ArrayList<Category>();
     private Spinner spnSelectedCourses;
+    private boolean isEmpty = false;
 
     public int idCourse;
 
@@ -48,8 +50,19 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
 
         }
 
-        checkCourses();
+        try {
+            // System.out.println("IDLANG : " + Data.KEYID_LANG);
+            ServerConn serverConn = (ServerConn) new ServerConn("getAllCoursesByID", Data.KEYID_LANG);
+            Data.listCourses = (List<Course>) serverConn.returnObject();
+            Thread.sleep(1000);
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        checkCourses();
 
         // Spinner con todos los cursos disponibles (Cuando haya que utilizar la BBDD en vez de
         // usar ArrayAdapter, habra que usar ClickAdapater [Esta en la guía oficial])
@@ -59,11 +72,13 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnSelectedCourses.setAdapter(adapter);
         updateCategories();
+
         spnSelectedCourses.setSelection(Data.selectedCourse);
         spnSelectedCourses.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Data.selectedCourse = parent.getSelectedItemPosition();
                 updateCategories();
             }
 
@@ -119,30 +134,33 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
         // En caso de que la conexión con el servidor LipeRMI falle, este metodo instanciaría el
         // ArrayList pero sin valores. Permitiendo asi abrir la app en "MODO OFFLINE"
 
-        if (Data.listCourses == null){
+        if (Data.listCourses == null || Data.listCourses.size() == 0){
             System.out.println("ARRAY NULL");
             Data.listCourses = new ArrayList<>();
+            isEmpty = true;
+        }else {
+            isEmpty = false;
         }
 
     }
 
     private void updateCategories(){
 
-        Course courseSelected = (Course) spnSelectedCourses.getSelectedItem();
-        idCourse = courseSelected.getIdCourse();
         mkCategories.clear();
 
-        try {
-            ServerConn serverConn = (ServerConn) new ServerConn("getAllCategoriesByID", idCourse);
-            List<Category> categoryList = (List<Category>) serverConn.returnObject();
-            for (Category cat : categoryList) {
-                mkCategories.add(cat);
+        if (!isEmpty){
+            Course courseSelected = (Course) spnSelectedCourses.getSelectedItem();
+            idCourse = courseSelected.getIdCourse();
+
+            try {
+                ServerConn serverConn = (ServerConn) new ServerConn("getAllCategoriesByID", idCourse);
+                List<Category> categoryList = (List<Category>) serverConn.returnObject();
+                mkCategories.addAll(categoryList);
+
+            }catch (Exception e){
+                e.printStackTrace();
             }
-
-        }catch (Exception e){
-            e.printStackTrace();
         }
-
     }
 
 }

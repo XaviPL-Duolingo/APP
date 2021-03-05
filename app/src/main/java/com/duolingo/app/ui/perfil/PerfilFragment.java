@@ -1,6 +1,7 @@
 package com.duolingo.app.ui.perfil;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,17 +52,23 @@ public class PerfilFragment extends Fragment {
             }
         });
 
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("userData", this.getActivity().getApplicationContext().MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
         getAllLanguages();
         Spinner spnLanguages = (Spinner) view.findViewById(R.id.spnLanguages);
         ArrayAdapter<Language> adapter = new ArrayAdapter<Language>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, languageArrayList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnLanguages.setAdapter(adapter);
-        spnLanguages.setSelection(Data.idOriginLang - 1);
+        spnLanguages.setSelection(Data.KEYID_LANG - 1);
         spnLanguages.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Language language = (Language) parent.getSelectedItem();
-                Data.idOriginLang = language.getIdLanguage();
+                Data.KEYID_LANG = language.getIdLanguage();
+                System.out.println(Data.KEYID_LANG);
+                editor.putInt("KEYID_LANG", Data.KEYID_LANG);
+                editor.apply();
             }
 
             @Override
