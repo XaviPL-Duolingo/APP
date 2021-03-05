@@ -20,7 +20,6 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static File folder, filename;
     public static final String secretKey = "ssshhhhhhhhhhh!!!!";
 
     @Override
@@ -59,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("userData", getApplicationContext().MODE_PRIVATE);
         Data.KEYID_USER = sharedPreferences.getString("KEYID_USER", "null");
-        Data.KEYID_LANG = sharedPreferences.getInt("KEYID_LANG", 0);
+        Data.KEYID_LANG = sharedPreferences.getInt("KEYID_LANG", 1);
 
         getUserData();
 
@@ -78,9 +77,13 @@ public class MainActivity extends AppCompatActivity {
             try {
                 ServerConn serverConn = (ServerConn) new ServerConn("getUserData", Data.KEYID_USER);
                 User userObj = (User) serverConn.returnObject();
+
                 Data.userName = userObj.getUsername();
                 Data.userElo = userObj.getElo();
                 Data.userMoney = userObj.getMoney();
+                Data.userXP = userObj.getXp();
+                Data.userRank = userObj.getIdRank();
+
             }catch (Exception e){
                 System.out.println("[SERVER] - Error al obtener datos del servidor...");
                 e.printStackTrace();

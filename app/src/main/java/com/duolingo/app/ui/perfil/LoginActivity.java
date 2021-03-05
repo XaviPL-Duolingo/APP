@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.duolingo.app.MainActivity;
 import com.duolingo.app.R;
+import com.duolingo.app.util.Data;
 import com.duolingo.app.util.Encrypter;
 import com.duolingo.app.util.ServerConn;
 
@@ -46,6 +48,8 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
+
+
 
     private void gotoRegister() {
 
@@ -88,11 +92,13 @@ public class LoginActivity extends AppCompatActivity {
 
                 // Guarda el identificador del usuario en SharedPreferences
                 Toast.makeText(this, "Inicio de sesion correcto!", Toast.LENGTH_SHORT).show();
-
+                Data.hasConnection = true;
                 SharedPreferences sharedPreferences = getSharedPreferences("userData", getApplicationContext().MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("KEYID_USER", username);
                 editor.apply();
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
                 finish();
 
             }else {

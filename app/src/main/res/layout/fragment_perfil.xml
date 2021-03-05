@@ -10,11 +10,11 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tagDashboard"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="25dp"
         app:cardBackgroundColor="#27223D"
         app:cardCornerRadius="30dp"
@@ -126,14 +126,14 @@
                                 android:src="@drawable/mail_icon" />
 
                             <TextView
-                                android:id="@+id/tvEmail"
+                                android:id="@+id/tvXP"
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_marginStart="5dp"
                                 android:layout_weight="1"
                                 android:fontFamily="@font/duolingo_medium"
                                 android:gravity="center_vertical"
-                                android:text="#EMAIL"
+                                android:text="#XP"
                                 android:textAlignment="viewStart" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
@@ -183,7 +183,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/cardView"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingStart="25dp"
@@ -212,39 +212,120 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tagSettings"
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/linearLayout"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        app:cardBackgroundColor="#27223D"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="0dp"
+        app:contentPadding="15dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tagSettings">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnConnect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/subcategory_icon"
+                    android:fontFamily="@font/duolingo_medium"
+                    android:text="CONECTARSE"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tagSettings" />
+
+                <Button
+                    android:id="@+id/btnChangeAvatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/subcategory_icon"
+                    android:fontFamily="@font/duolingo_medium"
+                    android:text="CAMBIAR AVATAR"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tagSettings" />
+
+                <Button
+                    android:id="@+id/btnStats"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/subcategory_icon"
+                    android:fontFamily="@font/duolingo_medium"
+                    android:text="TUS ESTADÍSTICAS"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tagSettings" />
+
+                <Button
+                    android:id="@+id/btnDisconnect"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:background="@drawable/subcategory_icon"
+                    android:fontFamily="@font/duolingo_medium"
+                    android:text="DESCONECTARSE"
+                    android:textAlignment="center"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tagSettings" />
+
+                <Button
+                    android:id="@+id/btnDeleteAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/subcategory_icon"
+                    android:fontFamily="@font/duolingo_medium"
+                    android:text="ELIMINAR CUENTA"
+                    android:textAlignment="center"
+                    android:textColor="#E91E63"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tagSettings" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tagDashboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="25dp"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="25dp"
         android:fontFamily="@font/duolingo_bold"
-        android:gravity="center"
-        android:text="AJUSTES"
+        android:text="DASHBOARD"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        android:textSize="25sp" />
 
-    <Button
-        android:id="@+id/btnTestLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tagSettings"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="25dp"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tagSettings" />
 
 </RelativeLayout>

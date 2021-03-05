@@ -18,13 +18,14 @@ import com.duolingo.app.util.Data;
 import com.duolingo.app.util.ServerConn;
 
 import java.util.ArrayList;
+import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 public class PerfilFragment extends Fragment {
 
-    private TextView tvUsername, tvMail, tvRanking;
+    private TextView tvUsername, tvXP, tvRanking;
     private ArrayList<Language> languageArrayList = new ArrayList<>();
-    private String userName, email, ranking;
+    private Button btnConnect, btnChangeAvatar, btnStats, btnDisconnect, btnDeleteAccount;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -33,24 +34,15 @@ public class PerfilFragment extends Fragment {
 
         // TextView = userName
         tvUsername = (TextView) view.findViewById(R.id.tvUsername);
-        tvUsername.setText(Data.KEYID_USER);
+        tvUsername.setText(Data.userName);
 
         // TextView = email
-        tvMail = (TextView) view.findViewById(R.id.tvEmail);
-        tvMail.setText(email);
+        tvXP = (TextView) view.findViewById(R.id.tvXP);
+        tvXP.setText(Integer.toString(Data.userXP) + "XP");
 
         // TextView = ranking
         tvRanking = (TextView) view.findViewById(R.id.tvRanking);
-        tvRanking.setText(ranking);
-
-        final Button btnLogin = view.findViewById(R.id.btnTestLogin);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), LoginActivity.class);
-                startActivity(intent);
-            }
-        });
+        tvRanking.setText(Data.userRank.getNameRank().toUpperCase());
 
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("userData", this.getActivity().getApplicationContext().MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -77,7 +69,72 @@ public class PerfilFragment extends Fragment {
             }
         });
 
+        // == SETTINGS == //
+
+        btnConnect = view.findViewById(R.id.btnConnect);
+        btnConnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnChangeAvatar = view.findViewById(R.id.btnChangeAvatar);
+        btnChangeAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnStats = view.findViewById(R.id.btnStats);
+        btnStats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnDisconnect = view.findViewById(R.id.btnDisconnect);
+        btnDisconnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Data.hasConnection = false;
+                checkConnection();
+            }
+        });
+
+
+        btnDeleteAccount = view.findViewById(R.id.btnDeleteAccount);
+        btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        checkConnection();
+
+
         return view;
+    }
+
+    private void checkConnection() {
+
+        if (Data.hasConnection){
+            btnConnect.setVisibility(View.GONE);
+            btnChangeAvatar.setVisibility(View.VISIBLE);
+            btnStats.setVisibility(View.VISIBLE);
+            btnDisconnect.setVisibility(View.VISIBLE);
+            btnDeleteAccount.setVisibility(View.VISIBLE);
+        }else {
+            btnConnect.setVisibility(View.VISIBLE);
+            btnChangeAvatar.setVisibility(View.GONE);
+            btnStats.setVisibility(View.GONE);
+            btnDisconnect.setVisibility(View.GONE);
+            btnDeleteAccount.setVisibility(View.GONE);
+        }
     }
 
     private void getAllLanguages(){

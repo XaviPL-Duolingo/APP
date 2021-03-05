@@ -89,7 +89,7 @@ public class ExerciceActivity extends AppCompatActivity {
             System.out.println(hasFailed + " + 150");
         }
 
-        updateXML();
+        // updateXML();
 
         // Reset de variables estaticas.
         arrayExercices.clear();
@@ -102,7 +102,7 @@ public class ExerciceActivity extends AppCompatActivity {
 
     }
 
-    private void updateXML(){
+    /*private void updateXML(){
 
         // updateXML()
         // Al acabar una categoría, añade las monedas ganadas al fichero XML y asi tenerlas
@@ -135,7 +135,7 @@ public class ExerciceActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-    }
+    }*/
 
     public void mkExercices(){
 
