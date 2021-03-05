@@ -47,7 +47,7 @@
         app:srcCompat="@drawable/points" />
 
     <TextView
-        android:id="@+id/tvCoins"
+        android:id="@+id/tvMoney"
         android:layout_width="94dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -64,7 +64,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvPoints"
+        android:id="@+id/tvElo"
         android:layout_width="94dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"

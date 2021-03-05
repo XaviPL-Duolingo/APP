@@ -8,8 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.duolingo.app.MainActivity;
 import com.duolingo.app.model.Exercice;
-import com.duolingo.app.tasks.OpenTransExActivity;
-import com.duolingo.app.tasks.TipusTestExActivity;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -83,11 +81,11 @@ public class ExerciceActivity extends AppCompatActivity {
         System.out.println("MONEY: "+totalMoney);
         System.out.println("POINTS: "+totalPoints);
 
-        Data.mkMoney += totalMoney;
-        Data.mkPoints += totalPoints;
+        Data.userMoney += totalMoney;
+        Data.userElo += totalPoints;
 
         if (!hasFailed){
-            Data.mkMoney += 150;
+            Data.userMoney += 150;
             System.out.println(hasFailed + " + 150");
         }
 
@@ -116,11 +114,11 @@ public class ExerciceActivity extends AppCompatActivity {
             Document doc = db.parse(MainActivity.filename);
 
             Node eMoney = doc.getElementsByTagName("money").item(0);
-            eMoney.setTextContent(Integer.toString(Data.mkMoney));
+            eMoney.setTextContent(Integer.toString(Data.userMoney));
 
             // TAG POINTS
             Node ePoints = doc.getElementsByTagName("points").item(0);
-            ePoints.setTextContent(Integer.toString(Data.mkPoints));
+            ePoints.setTextContent(Integer.toString(Data.userElo));
 
             // Transforma los Element i el Document a un fichero XML y lo guarda
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
