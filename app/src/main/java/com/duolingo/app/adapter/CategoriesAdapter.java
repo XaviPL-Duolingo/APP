@@ -15,7 +15,7 @@ import java.util.List;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<com.duolingo.app.adapter.CategoriesAdapter.ViewHolder> {
 
-    private ArrayList<Category> mkCategories = new ArrayList<Category>();
+    // private ArrayList<Category> mkCategories = new ArrayList<Category>();
     private OnNoteListener mOnNoteListener;
     private List<Category> mData;
     private LayoutInflater mInflater;
@@ -37,7 +37,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<com.duolingo.app.ada
 
     public void setItems(List<Category> items) {
         mData = items;
-
     }
 
     public void onBindViewHolder(final com.duolingo.app.adapter.CategoriesAdapter.ViewHolder holder, final int position){
@@ -61,7 +60,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<com.duolingo.app.ada
 
         ViewHolder(View itemView, OnNoteListener onNoteListener){
             super(itemView);
-            //ivPhoto = itemView.findViewById(R.id.ivIcon);
             tvTitle = itemView.findViewById(R.id.rTvTitle);
             tvLevel = itemView.findViewById(R.id.rTvLevel);
             progressBar = itemView.findViewById(R.id.progressBar);
