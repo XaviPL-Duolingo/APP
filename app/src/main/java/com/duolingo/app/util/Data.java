@@ -1,8 +1,7 @@
 package com.duolingo.app.util;
 
 import com.duolingo.app.model.Course;
-import com.duolingo.app.model.Language;
-import com.duolingo.app.model.Rank;
+import com.duolingo.app.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +17,7 @@ public class Data {
     public static int KEYID_LANG;
     public static int selectedCourse;
 
-    public static String userName = "";
-    public static int userXP = 0;
-    public static int userMoney = 0;
-    public static int userElo = 0;
-    public static Rank userRank = null;
+    public static User userData = null;
 
     public static List<Course> listCourses;
 

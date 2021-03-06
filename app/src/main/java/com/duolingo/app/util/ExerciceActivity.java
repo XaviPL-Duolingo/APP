@@ -81,11 +81,11 @@ public class ExerciceActivity extends AppCompatActivity {
         System.out.println("MONEY: "+totalMoney);
         System.out.println("POINTS: "+totalPoints);
 
-        Data.userMoney += totalMoney;
-        Data.userElo += totalPoints;
+        //Data.userData.getMoney() += totalMoney;
+        // Data.userElo += totalPoints;
 
         if (!hasFailed){
-            Data.userMoney += 150;
+            // Data.userMoney += 150;
             System.out.println(hasFailed + " + 150");
         }
 

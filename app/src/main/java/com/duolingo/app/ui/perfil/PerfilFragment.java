@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.fragment.app.Fragment;
+
+import com.duolingo.app.MainActivity;
 import com.duolingo.app.R;
 import com.duolingo.app.model.Language;
 import com.duolingo.app.util.Data;
@@ -34,15 +36,8 @@ public class PerfilFragment extends Fragment {
 
         // TextView = userName
         tvUsername = (TextView) view.findViewById(R.id.tvUsername);
-        tvUsername.setText(Data.userName);
-
-        // TextView = email
         tvXP = (TextView) view.findViewById(R.id.tvXP);
-        tvXP.setText(Integer.toString(Data.userXP) + "XP");
-
-        // TextView = ranking
         tvRanking = (TextView) view.findViewById(R.id.tvRanking);
-        tvRanking.setText(Data.userRank.getNameRank().toUpperCase());
 
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("userData", this.getActivity().getApplicationContext().MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -101,7 +96,12 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Data.hasConnection = false;
-                checkConnection();
+                editor.remove("KEYID_USER");
+                editor.apply();
+                // checkConnection();
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
 
@@ -128,12 +128,18 @@ public class PerfilFragment extends Fragment {
             btnStats.setVisibility(View.VISIBLE);
             btnDisconnect.setVisibility(View.VISIBLE);
             btnDeleteAccount.setVisibility(View.VISIBLE);
+            tvUsername.setText(Data.userData.getUsername());
+            tvXP.setText(Data.userData.getXp() + "XP");
+            tvRanking.setText(Data.userData.getIdRank().getNameRank().toUpperCase());
         }else {
             btnConnect.setVisibility(View.VISIBLE);
             btnChangeAvatar.setVisibility(View.GONE);
             btnStats.setVisibility(View.GONE);
             btnDisconnect.setVisibility(View.GONE);
             btnDeleteAccount.setVisibility(View.GONE);
+            tvUsername.setText("");
+            tvXP.setText("");
+            tvRanking.setText("");
         }
     }
 

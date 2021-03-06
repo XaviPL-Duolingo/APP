@@ -43,22 +43,17 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
         view = inflater.inflate(R.layout.fragment_curs, container, false);
         TextView tvTitle = (TextView) view.findViewById(R.id.tvTitle);
 
-        if (Data.userName.isEmpty()){
+        if (!Data.hasConnection){
             tvTitle.setText("Buholingo!");
         }else{
-            tvTitle.setText("Hola, "+Data.userName);
+            tvTitle.setText("Hola, "+Data.userData.getUsername());
 
         }
 
         try {
-            // System.out.println("IDLANG : " + Data.KEYID_LANG);
             ServerConn serverConn = (ServerConn) new ServerConn("getAllCoursesByID", Data.KEYID_LANG);
             Data.listCourses = (List<Course>) serverConn.returnObject();
-            Thread.sleep(1000);
-
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 

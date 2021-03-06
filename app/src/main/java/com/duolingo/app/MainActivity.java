@@ -34,10 +34,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TextView tvMoney = findViewById(R.id.tvMoney);
-        tvMoney.setText(Integer.toString(Data.userMoney));
-
         TextView tvElo = findViewById(R.id.tvElo);
-        tvElo.setText(Integer.toString(Data.userElo));
+
+        if (Data.hasConnection){
+            tvMoney.setText(Integer.toString(Data.userData.getMoney()));
+            tvElo.setText(Integer.toString(Data.userData.getElo()));
+        }else {
+            tvMoney.setText("0");
+            tvElo.setText("0");
+        }
+
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
@@ -70,19 +76,13 @@ public class MainActivity extends AppCompatActivity {
         // A partir de la clave KEYID_USER se sabe si hay una sesión iniciada o no
         // Si la hay se conecta al servidor y se obtienen los datos del usuario.
 
-        if (Data.KEYID_USER == null){
+        if (Data.KEYID_USER.equals("null")){
             Data.hasConnection = false;
         }else {
             Data.hasConnection = true;
             try {
                 ServerConn serverConn = (ServerConn) new ServerConn("getUserData", Data.KEYID_USER);
-                User userObj = (User) serverConn.returnObject();
-
-                Data.userName = userObj.getUsername();
-                Data.userElo = userObj.getElo();
-                Data.userMoney = userObj.getMoney();
-                Data.userXP = userObj.getXp();
-                Data.userRank = userObj.getIdRank();
+                Data.userData = (User) serverConn.returnObject();
 
             }catch (Exception e){
                 System.out.println("[SERVER] - Error al obtener datos del servidor...");
