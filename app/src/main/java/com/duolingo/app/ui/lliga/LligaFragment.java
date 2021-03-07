@@ -1,7 +1,6 @@
 package com.duolingo.app.ui.lliga;
 
 import android.graphics.Color;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,8 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.duolingo.app.R;
-import com.duolingo.app.adapter.CategoriesAdapter;
 import com.duolingo.app.adapter.RankingAdapter;
+import com.duolingo.app.adapter.SpacesItemDecoration;
 import com.duolingo.app.model.User;
 import com.duolingo.app.util.Data;
 import com.duolingo.app.util.ServerConn;
@@ -127,24 +126,3 @@ public class LligaFragment extends Fragment implements RankingAdapter.OnNoteList
     }
 }
 
-class SpacesItemDecoration extends RecyclerView.ItemDecoration {
-    private int space;
-
-    public SpacesItemDecoration(int space) {
-        this.space = space;
-    }
-
-    @Override
-    public void getItemOffsets(Rect outRect, View view,
-                               RecyclerView parent, RecyclerView.State state) {
-
-        outRect.bottom = space;
-
-        // Add top margin only for the first item to avoid double space between items
-        if (parent.getChildLayoutPosition(view) == 0) {
-            outRect.top = space;
-        } else {
-            outRect.top = 0;
-        }
-    }
-}
