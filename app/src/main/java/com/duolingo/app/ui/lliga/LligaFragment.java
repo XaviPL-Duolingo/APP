@@ -22,6 +22,7 @@ import com.duolingo.app.util.Data;
 import com.duolingo.app.util.ServerConn;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 
 public class LligaFragment extends Fragment implements RankingAdapter.OnNoteListener{
@@ -34,6 +35,15 @@ public class LligaFragment extends Fragment implements RankingAdapter.OnNoteList
 
         if (Data.hasConnection){
             List<User> rankingList = getRanking();
+
+            final TextView tvUserPos = root.findViewById(R.id.tvUserPos);
+            tvUserPos.setText("#" + (findUsingIterator(Data.userData.getUsername(), rankingList) + 1));
+
+            final TextView tvUsername = root.findViewById(R.id.tvUserRank);
+            tvUsername.setText(Data.userData.getUsername());
+
+            final TextView tvUserElo = root.findViewById(R.id.tvUserElo);
+            tvUserElo.setText(Integer.toString(Data.userData.getElo()));
 
             tvRankName = root.findViewById(R.id.tvRankName);
             tvRankName.setText(Data.userData.getIdRank().getNameRank().toUpperCase());
@@ -98,6 +108,18 @@ public class LligaFragment extends Fragment implements RankingAdapter.OnNoteList
         }
 
     }
+
+    public int findUsingIterator(String name, List<User> rankingList) {
+        Iterator<User> iterator = rankingList.iterator();
+        while (iterator.hasNext()) {
+            User user = iterator.next();
+            if (user.getUsername().equals(name)) {
+                return rankingList.indexOf(user);
+            }
+        }
+        return 0;
+    }
+
 
     @Override
     public void onNoteClick(int position) {

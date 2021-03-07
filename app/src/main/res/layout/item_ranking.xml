@@ -15,8 +15,10 @@
         android:orientation="horizontal">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cvPos"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            app:cardBackgroundColor="#1C142E"
             app:cardCornerRadius="15dp"
             app:contentPaddingLeft="5dp"
             app:contentPaddingRight="5dp">
@@ -29,7 +31,7 @@
                 android:fontFamily="@font/duolingo_bold"
                 android:text="#1024"
                 android:textAlignment="center"
-                android:textColor="#000000"
+                android:textColor="#FFFFFF"
                 android:textSize="18sp" />
         </androidx.cardview.widget.CardView>
 
@@ -59,17 +61,16 @@
                 app:cardCornerRadius="20dp"
                 app:cardElevation="0dp"
                 app:contentPaddingLeft="10dp"
-                app:contentPaddingRight="10dp"
-                app:contentPaddingTop="4dp">
+                app:contentPaddingRight="10dp">
 
                 <TextView
                     android:id="@+id/rTvElo"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
                     android:fontFamily="@font/duolingo_bold"
-                    android:gravity="center|right"
+                    android:gravity="center"
                     android:text="10000"
-                    android:textAlignment="viewEnd"
+                    android:textAlignment="center"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
             </androidx.cardview.widget.CardView>
