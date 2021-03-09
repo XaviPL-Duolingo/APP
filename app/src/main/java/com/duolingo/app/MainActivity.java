@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("userData", getApplicationContext().MODE_PRIVATE);
         Data.KEYID_USER = sharedPreferences.getString("KEYID_USER", "null");
         Data.KEYID_LANG = sharedPreferences.getInt("KEYID_LANG", 1);
-        Data.KEYID_COURSE = sharedPreferences.getInt("KEYID_COURSE", 1);
+        Data.KEYID_COURSE = sharedPreferences.getInt("KEYID_COURSE", 0);
 
         getUserData();
 
