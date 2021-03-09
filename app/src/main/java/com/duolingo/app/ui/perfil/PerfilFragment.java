@@ -52,10 +52,16 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 Language language = (Language) parent.getSelectedItem();
-                Data.KEYID_LANG = language.getIdLanguage();
-                System.out.println(Data.KEYID_LANG);
-                editor.putInt("KEYID_LANG", Data.KEYID_LANG);
-                editor.apply();
+
+                if (Data.KEYID_LANG != language.getIdLanguage()){
+                    Data.KEYID_LANG = language.getIdLanguage();
+                    Data.KEYID_COURSE = 0;
+                    System.out.println(Data.KEYID_LANG);
+                    editor.putInt("KEYID_LANG", Data.KEYID_LANG);
+                    editor.putInt("KEYID_COURSE", Data.KEYID_COURSE);
+                    editor.apply();
+                }
+
             }
 
             @Override

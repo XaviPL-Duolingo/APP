@@ -1,6 +1,7 @@
 package com.duolingo.app.ui.curs;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,6 @@ import com.duolingo.app.util.ExerciceActivity;
 import com.duolingo.app.util.ServerConn;
 
 import java.io.IOException;
-import java.nio.channels.MembershipKey;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,12 +68,17 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
         spnSelectedCourses.setAdapter(adapter);
         updateCategories();
 
-        spnSelectedCourses.setSelection(Data.selectedCourse);
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("userData", this.getActivity().getApplicationContext().MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        spnSelectedCourses.setSelection(Data.KEYID_COURSE);
         spnSelectedCourses.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Data.selectedCourse = parent.getSelectedItemPosition();
+                Data.KEYID_COURSE = parent.getSelectedItemPosition();
+                editor.putInt("KEYID_LANG", Data.KEYID_LANG);
+                editor.apply();
                 updateCategories();
             }
 
