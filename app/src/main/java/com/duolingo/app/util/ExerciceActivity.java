@@ -103,8 +103,10 @@ public class ExerciceActivity extends AppCompatActivity {
         Category categoryObj = (Category) intent.getSerializableExtra("category");
 
         try {
-            ServerConn serverConn = (ServerConn) new ServerConn("getLastExercice", Data.userData.getIdUser(), categoryObj.getIdCategory());
-            return (Level) serverConn.returnObject();
+            ServerConn serverConn = (ServerConn) new ServerConn("getLevel", Data.userData.getIdUser(), categoryObj.getIdCategory());
+            Level levelObj =  (Level) serverConn.returnObject();
+            System.out.println(levelObj.getIdLevel());
+            return levelObj;
         } catch (IOException e) {
             e.printStackTrace();
         }
