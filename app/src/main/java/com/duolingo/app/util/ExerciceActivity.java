@@ -43,10 +43,10 @@ public class ExerciceActivity extends AppCompatActivity {
 
                 switch (typeExercice.getIdTypeExercice()){
                     case 1:
-                        intent = new Intent(context, OpenTransExActivity.class);
+                        intent = new Intent(context, TranslateOpenActivity.class);
                         break;
                     case 7:
-                        intent = new Intent(context, TipusTestExActivity.class);
+                        intent = new Intent(context, TypeTestActivity.class);
                         break;
                     default:
                         System.out.println("[DEBUG] - idTypeExercice NO valida...");

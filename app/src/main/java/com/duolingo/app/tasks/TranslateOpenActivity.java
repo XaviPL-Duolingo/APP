@@ -13,7 +13,7 @@ import com.duolingo.app.model.Exercice;
 import com.duolingo.app.util.ExerciceActivity;
 import com.google.android.material.snackbar.Snackbar;
 
-public class OpenTransExActivity extends AppCompatActivity {
+public class TranslateOpenActivity extends AppCompatActivity {
 
     private final int exTypePoints = 20, exTypeCoins = 20;
 

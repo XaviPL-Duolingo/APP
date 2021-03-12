@@ -17,7 +17,7 @@ import org.json.JSONObject;
 
 import java.util.Random;
 
-public class TipusTestExActivity extends AppCompatActivity {
+public class TypeTestActivity extends AppCompatActivity {
 
     // TipusTestActivity
     // Activity para los EXERCICES con idTypeExercice = 7
