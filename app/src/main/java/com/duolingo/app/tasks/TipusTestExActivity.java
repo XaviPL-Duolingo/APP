@@ -16,8 +16,6 @@ import java.util.Random;
 public class TipusTestExActivity extends AppCompatActivity {
 
     // tipusTestActivity
-    // Esta és la activity de los ejercicios TipusTest. Se ejecutará cuando la ID del TipusExercici
-    // sea la misma que tienen los ejercicios TipusTest. Obtendrá los valores mediante LipeRMI (mkUp)
 
     private final int exTypePoints = 15, exTypeCoins = 15;
 

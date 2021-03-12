@@ -114,8 +114,8 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
 
     @Override
     public void onNoteClick(int position) {
-        mkCategories.get(position);
         Intent intent = new Intent(getContext(), ExerciceActivity.class);
+        intent.putExtra("category", mkCategories.get(position));
         startActivity(intent);
     }
 
