@@ -11,11 +11,16 @@ import com.duolingo.app.R;
 import com.duolingo.app.model.Exercice;
 import com.duolingo.app.util.ExerciceActivity;
 import com.google.android.material.snackbar.Snackbar;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Random;
 
 public class TipusTestExActivity extends AppCompatActivity {
 
-    // tipusTestActivity
+    // TipusTestActivity
+    // Activity para los EXERCICES con idTypeExercice = 7
 
     private final int exTypePoints = 15, exTypeCoins = 15;
 
@@ -29,7 +34,6 @@ public class TipusTestExActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task);
-
 
         tvStatement = findViewById(R.id.tvStatement);
         btAnswer1 = findViewById(R.id.btAnswer1);
@@ -61,11 +65,15 @@ public class TipusTestExActivity extends AppCompatActivity {
         progressBar.setProgress(ExerciceActivity.exIndex);
 
         if (getIntent().getExtras() != null){
-            Exercice rawData = (Exercice) getIntent().getSerializableExtra("data");
-            // String[] rawData = {"Mi gato es negro", "My cat is black", "Black is the cat", "The cat as black"};
-            //tvStatement.setText(rawData.getExStatement());
-            //arrayAnswers = new String[] {rawData.getWord1(), rawData.getWord2(), rawData.getWord3()};
-            //answer = rawData.getWord1();
+            try {
+                Exercice exerciceObj = (Exercice) getIntent().getSerializableExtra("data");
+                JSONObject rawData = new JSONObject(exerciceObj.getContentExercice());
+                tvStatement.setText((String) rawData.get("phrToTranslate"));
+                arrayAnswers = new String[] {(String) rawData.get("correctAnswer"), (String) rawData.get("wrongAnswer1"), (String) rawData.get("wrongAnswer2")};
+                answer = (String) rawData.get("correctAnswer");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
     }
