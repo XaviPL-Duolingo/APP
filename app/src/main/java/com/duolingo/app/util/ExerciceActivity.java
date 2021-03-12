@@ -35,32 +35,35 @@ public class ExerciceActivity extends AppCompatActivity {
         // Dependiendo del ejercicio que toque "exIndex" compara su TypeExerciceID y abre uno u
         // otro ejercicio.
 
-        if (exIndex < arrayExercices.size()){
+        if(arrayExercices != null){
+            if (exIndex < arrayExercices.size()){
 
-            Intent intent;
-            TypeExercice typeExercice = arrayExercices.get(exIndex).getIdTypeExercice();
+                Intent intent;
+                TypeExercice typeExercice = arrayExercices.get(exIndex).getIdTypeExercice();
 
-            switch (typeExercice.getIdTypeExercice()){
-                case 1:
-                    intent = new Intent(context, OpenTransExActivity.class);
-                    break;
-                case 7:
-                    intent = new Intent(context, TipusTestExActivity.class);
-                    break;
-                default:
-                    System.out.println("[DEBUG] - idTypeExercice NO valida...");
-                    throw new IllegalStateException("Unexpected value: " + typeExercice.getIdTypeExercice());
+                switch (typeExercice.getIdTypeExercice()){
+                    case 1:
+                        intent = new Intent(context, OpenTransExActivity.class);
+                        break;
+                    case 7:
+                        intent = new Intent(context, TipusTestExActivity.class);
+                        break;
+                    default:
+                        System.out.println("[DEBUG] - idTypeExercice NO valida...");
+                        throw new IllegalStateException("Unexpected value: " + typeExercice.getIdTypeExercice());
+                }
+
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("data", arrayExercices.get(exIndex));
+                context.startActivity(intent);
+                exIndex++;
+
+            }else{
+                finishExercice();
             }
-
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra("data", arrayExercices.get(exIndex));
-            context.startActivity(intent);
-            exIndex++;
-
-        }else{
-            finishExercice();
         }
     }
+
 
     public void finishExercice(){
 
@@ -105,7 +108,6 @@ public class ExerciceActivity extends AppCompatActivity {
         try {
             ServerConn serverConn = (ServerConn) new ServerConn("getLevel", Data.userData.getIdUser(), categoryObj.getIdCategory());
             Level levelObj =  (Level) serverConn.returnObject();
-            System.out.println(levelObj.getIdLevel());
             return levelObj;
         } catch (IOException e) {
             e.printStackTrace();
@@ -123,9 +125,11 @@ public class ExerciceActivity extends AppCompatActivity {
 
         try {
             Level levelObj = getLevel();
-            ServerConn serverConn = (ServerConn) new ServerConn("getExercices", levelObj.getIdLevel());
-            List<Exercice> exerciceList = (List<Exercice>) serverConn.returnObject();
-            arrayExercices.addAll(exerciceList);
+            if (levelObj != null){
+                ServerConn serverConn = (ServerConn) new ServerConn("getExercices", levelObj.getIdLevel());
+                List<Exercice> exerciceList = (List<Exercice>) serverConn.returnObject();
+                arrayExercices.addAll(exerciceList);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
