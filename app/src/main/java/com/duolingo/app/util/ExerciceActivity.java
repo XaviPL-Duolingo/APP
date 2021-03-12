@@ -35,32 +35,30 @@ public class ExerciceActivity extends AppCompatActivity {
         // Dependiendo del ejercicio que toque "exIndex" compara su TypeExerciceID y abre uno u
         // otro ejercicio.
 
-        if(arrayExercices != null){
-            if (exIndex < arrayExercices.size()){
+        if (exIndex < arrayExercices.size()){
 
-                Intent intent;
-                TypeExercice typeExercice = arrayExercices.get(exIndex).getIdTypeExercice();
+            Intent intent;
+            TypeExercice typeExercice = arrayExercices.get(exIndex).getIdTypeExercice();
 
-                switch (typeExercice.getIdTypeExercice()){
-                    case 1:
-                        intent = new Intent(context, TranslateOpenActivity.class);
-                        break;
-                    case 7:
-                        intent = new Intent(context, TypeTestActivity.class);
-                        break;
-                    default:
-                        System.out.println("[DEBUG] - idTypeExercice NO valida...");
-                        throw new IllegalStateException("Unexpected value: " + typeExercice.getIdTypeExercice());
-                }
-
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("data", arrayExercices.get(exIndex));
-                context.startActivity(intent);
-                exIndex++;
-
-            }else{
-                finishExercice();
+            switch (typeExercice.getIdTypeExercice()){
+                case 1:
+                    intent = new Intent(context, TranslateOpenActivity.class);
+                    break;
+                case 7:
+                    intent = new Intent(context, TypeTestActivity.class);
+                    break;
+                default:
+                    System.out.println("[DEBUG] - idTypeExercice NO valida...");
+                    throw new IllegalStateException("Unexpected value: " + typeExercice.getIdTypeExercice());
             }
+
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.putExtra("data", arrayExercices.get(exIndex));
+            context.startActivity(intent);
+            exIndex++;
+
+        }else {
+            finishExercice();
         }
     }
 

@@ -13,12 +13,17 @@ import com.duolingo.app.model.Exercice;
 import com.duolingo.app.util.ExerciceActivity;
 import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 public class TranslateOpenActivity extends AppCompatActivity {
 
     private final int exTypePoints = 20, exTypeCoins = 20;
 
     private String phrToTranslate;
-    private String[] arraySolutions;
+    private ArrayList<String> arraySolutions = new ArrayList<>();
     private EditText etPlayerAnswer;
     private Button btCheck;
     private boolean isCorrect = false;
@@ -55,9 +60,16 @@ public class TranslateOpenActivity extends AppCompatActivity {
         progressBar.setProgress(ExerciceActivity.exIndex);
 
         if (getIntent().getExtras() != null){
-            Exercice rawData = (Exercice) getIntent().getSerializableExtra("data");
-            phrToTranslate = "Tomate"; //rawData.getExStatement();
-            arraySolutions = "Alertr//frfr//ftr".split("//"); //rawData.getWord1().split("//");
+            try {
+                Exercice exerciceObj = (Exercice) getIntent().getSerializableExtra("data");
+                JSONObject rawData = new JSONObject(exerciceObj.getContentExercice());
+                phrToTranslate = (String) rawData.get("phrToTranslate");
+                for (int i = 1; i < 100; i++){
+                    arraySolutions.add((String) rawData.get("answer"+ i));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -73,8 +85,8 @@ public class TranslateOpenActivity extends AppCompatActivity {
         etPlayerAnswer.setEnabled(false);
         btCheck.setEnabled(false);
 
-        for (int i = 0; i < arraySolutions.length; i++){
-            if (answer.equals(arraySolutions[i].toLowerCase())){
+        for (int i = 0; i < arraySolutions.size(); i++){
+            if (answer.equals(arraySolutions.get(i).toLowerCase())){
                 isCorrect = true;
                 break;
             }
