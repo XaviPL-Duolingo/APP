@@ -44,6 +44,9 @@ public class ExerciceActivity extends AppCompatActivity {
                 case 1:
                     intent = new Intent(context, TranslateOpenActivity.class);
                     break;
+                case 2:
+                    intent = new Intent(context, TranslateSortActivity.class);
+                    break;
                 case 7:
                     intent = new Intent(context, TypeTestActivity.class);
                     break;

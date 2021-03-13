@@ -13,9 +13,6 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
-        <activity android:name=".tasks.WordFillActivity"></activity>
-        <activity android:name=".tasks.WordMatchActivity" />
-        <activity android:name=".tasks.TranslateSortActivity" />
         <activity
             android:name=".util.ExerciceActivity"
             android:label="@string/app_name"
@@ -36,6 +33,21 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/TranslucentStatusBar" />
+        <activity
+            android:name=".tasks.TranslateSortActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/TranslucentStatusBar"/>
+        <activity
+            android:name=".tasks.WordFillActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/TranslucentStatusBar" />
+        <activity
+            android:name=".tasks.WordMatchActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/TranslucentStatusBar"/>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
