@@ -124,8 +124,8 @@ public class TranslateOpenActivity extends AppCompatActivity {
             }
         });
         snackbar.setActionTextColor(Color.parseColor("#cb2cc6"));
-
         snackbar.show();
+
     }
 
     public static String fixInput(String answer) {

@@ -2,6 +2,7 @@ package com.duolingo.app.tasks;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,19 +12,28 @@ import android.widget.TextView;
 import com.duolingo.app.R;
 import com.duolingo.app.model.Exercice;
 import com.duolingo.app.util.ExerciceActivity;
+import com.google.android.material.snackbar.Snackbar;
 import com.nex3z.flowlayout.FlowLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 public class TranslateSortActivity extends AppCompatActivity {
 
+    private int exTypePoints = 15, exTypeCoins = 15;
+    private FlowLayout flAnswer, flWords;
     private String phrToTranslate, answer;
-    private String[] arrayWords;
+    private List<String> arrayWords;
     private Button btCheck;
     private boolean isCorrect = false;
+    private int selectedWords = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,31 +45,94 @@ public class TranslateSortActivity extends AppCompatActivity {
         TextView tvPhrToTranslate = findViewById(R.id.tvPhrToTranslate);
         tvPhrToTranslate.setText(phrToTranslate);
 
-        FlowLayout flWords = findViewById(R.id.flWords);
-        for (int i = 0; i < arrayWords.length; i++){
-            Button btnWord = new Button(this);
-            btnWord.setText(arrayWords[i]);
-            btnWord.setBackgroundResource(R.drawable.next_layout);
-            btnWord.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+        flAnswer = findViewById(R.id.flAnswer);
+        flWords = findViewById(R.id.flWords);
 
+        for (int i = 0; i < arrayWords.size(); i++){
+            Button btnWord = new Button(this);
+            btnWord.setBackgroundResource(R.drawable.next_layout);
+            btnWord.setText(arrayWords.get(i));
+
+            // Dependiendo del FlowLayout donde se encuentre, varia de layout al pulsar
+
+            btnWord.setOnClickListener(v -> {
+                if (v.getParent() == flWords){
+                    flWords.removeView(v);
+                    flAnswer.addView(v);
+                }else {
+                    flAnswer.removeView(v);
+                    flWords.addView(v);
                 }
             });
+
             flWords.addView(btnWord);
+
         }
 
         btCheck = findViewById(R.id.btNext);
-        btCheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkAnswer();
-            }
-        });
+        btCheck.setOnClickListener(v -> checkAnswer(v));
         
     }
 
-    private void checkAnswer() {
+    private void checkAnswer(View v) {
+
+        // checkAnswer()
+        // Recorre entero "flAnswer" y junta todas las palabras en una sola
+        //  linea y comprueba si es igual a "answer"
+
+        btCheck.setEnabled(false);
+
+        String playerAnswer = "";
+        for (int i = 0; i < flAnswer.getChildCount(); i++){
+            Button btnAnswer = (Button) flAnswer.getChildAt(i);
+            btnAnswer.setEnabled(false);
+            playerAnswer = playerAnswer.concat(btnAnswer.getText() + " ");
+        }
+
+        if (playerAnswer.toLowerCase().equals(answer.concat(" ").toLowerCase())){
+            showResult(true, v);
+        }else {
+            showResult(false, v);
+        }
+
+
+    }
+
+    private void showResult(boolean isCorrect, View v) {
+
+        String msg = "";
+
+        // Si esta OK o dona ERROR.
+        if (isCorrect){
+            ExerciceActivity.totalPoints += exTypePoints;
+            ExerciceActivity.totalMoney += exTypeCoins;
+            msg = "OK! ";
+
+        }else{
+            ExerciceActivity.hasFailed = true;
+            msg = "ERROR... ";
+        }
+
+        // Si es el ultimo nivel
+        if (ExerciceActivity.exIndex == ExerciceActivity.arrayExercices.size()){
+            msg = msg + "Puntos obtenidos : ["+ExerciceActivity.totalPoints+"] -- Monedas obtenidas: ["+ExerciceActivity.totalPoints+"]";
+            // Si hasFailed es FALSE
+            if (!ExerciceActivity.hasFailed){
+                msg = msg + " [+150 BONUS]";
+            }
+        }
+
+        // Mostra SNACKBAR
+        Snackbar snackbar = Snackbar.make(v, msg, Snackbar.LENGTH_INDEFINITE);
+        snackbar.setAction(R.string.snack_next, new View.OnClickListener(){
+            public void onClick(View view) {
+                ExerciceActivity e = new ExerciceActivity();
+                e.nextExercice(getApplicationContext());
+                finish();
+            }
+        });
+        snackbar.setActionTextColor(Color.parseColor("#cb2cc6"));
+        snackbar.show();
 
     }
 
@@ -79,11 +152,20 @@ public class TranslateSortActivity extends AppCompatActivity {
                 JSONObject rawData = new JSONObject(exerciceObj.getContentExercice());
                 phrToTranslate = (String) rawData.get("phrToTranslate");
                 answer = (String) rawData.get("answer1");
-                arrayWords = answer.split(" ");
+                arrayWords = Arrays.asList(answer.split(" "));
+                Collections.shuffle(arrayWords);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
+    }
 
+    @Override
+    public void onBackPressed() {
+
+        // onBackPressed()
+        // Al presionar el boton BACK, reemplaza su accion original por NO hacer nada
+
+        return;
     }
 }

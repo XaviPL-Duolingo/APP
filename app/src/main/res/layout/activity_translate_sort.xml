@@ -49,6 +49,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.nex3z.flowlayout.FlowLayout
+        android:id="@+id/flAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/flWords"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPhrToTranslate" />
+
+    <com.nex3z.flowlayout.FlowLayout
         android:id="@+id/flWords"
         android:layout_width="match_parent"
         android:layout_height="150dp"
