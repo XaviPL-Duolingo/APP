@@ -44,12 +44,6 @@ public class TranslateSortActivity extends AppCompatActivity {
 
         getData();
 
-        tts = new TextToSpeech(this, status -> {
-            if (status == TextToSpeech.SUCCESS){
-                tts.setLanguage(Locale.ENGLISH);
-            }
-        });
-
         TextView tvPhrToTranslate = findViewById(R.id.tvPhrToTranslate);
         tvPhrToTranslate.setText(phrToTranslate);
 
