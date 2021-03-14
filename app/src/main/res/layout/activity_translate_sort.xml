@@ -23,42 +23,49 @@
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="207dp"
-        android:layout_height="29dp"
-        android:layout_marginTop="124dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
         android:fontFamily="@font/duolingo_medium"
         android:text="Traduce esta frase: "
         android:textAlignment="center"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvPhrToTranslate"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/progressBar"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/tvPhrToTranslate"
         android:layout_width="308dp"
-        android:layout_height="123dp"
-        android:layout_marginTop="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
         android:fontFamily="@font/duolingo_black"
         android:gravity="center"
         android:text="Esta es una frase de ejemplo que deberia de ser traducida por el jugador"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/flAnswer"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/progressBar"
+        app:layout_constraintVertical_bias="1.0" />
 
     <com.nex3z.flowlayout.FlowLayout
         android:id="@+id/flAnswer"
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
         android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/answer_layout"
+        android:gravity="center"
+        android:padding="10dp"
         app:layout_constraintBottom_toTopOf="@+id/flWords"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvPhrToTranslate" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.nex3z.flowlayout.FlowLayout
         android:id="@+id/flWords"

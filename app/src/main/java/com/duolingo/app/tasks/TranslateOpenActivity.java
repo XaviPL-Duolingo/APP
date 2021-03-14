@@ -42,12 +42,7 @@ public class TranslateOpenActivity extends AppCompatActivity {
         etPlayerAnswer.setText("");
 
         btCheck = findViewById(R.id.btNext);
-        btCheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkAnswer(etPlayerAnswer.getText().toString(), v);
-            }
-        });
+        btCheck.setOnClickListener(v -> checkAnswer(etPlayerAnswer.getText().toString(), v));
     }
 
     public void getData(){
@@ -68,7 +63,7 @@ public class TranslateOpenActivity extends AppCompatActivity {
                     arraySolutions.add((String) rawData.get("answer"+ i));
                 }
             } catch (JSONException e) {
-                e.printStackTrace();
+                System.out.println("[DEBUG] - Obtenidas todas las respuestas posibles!");
             }
         }
     }
@@ -116,12 +111,10 @@ public class TranslateOpenActivity extends AppCompatActivity {
 
         // Mostra SNACKBAR
         Snackbar snackbar = Snackbar.make(v, msg, Snackbar.LENGTH_INDEFINITE);
-        snackbar.setAction(R.string.snack_next, new View.OnClickListener(){
-            public void onClick(View view) {
-                ExerciceActivity e = new ExerciceActivity();
-                e.nextExercice(getApplicationContext());
-                finish();
-            }
+        snackbar.setAction(R.string.snack_next, view -> {
+            ExerciceActivity e = new ExerciceActivity();
+            e.nextExercice(getApplicationContext());
+            finish();
         });
         snackbar.setActionTextColor(Color.parseColor("#cb2cc6"));
         snackbar.show();
