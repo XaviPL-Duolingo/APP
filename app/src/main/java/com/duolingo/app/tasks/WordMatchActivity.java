@@ -1,12 +1,17 @@
 package com.duolingo.app.tasks;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.duolingo.app.R;
 import com.duolingo.app.adapter.RankingAdapter;
@@ -14,6 +19,7 @@ import com.duolingo.app.adapter.SpacesItemDecoration;
 import com.duolingo.app.adapter.WordMatchAdapter;
 import com.duolingo.app.model.Exercice;
 import com.duolingo.app.util.ExerciceActivity;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,8 +30,10 @@ import java.util.List;
 
 public class WordMatchActivity extends AppCompatActivity implements WordMatchAdapter.OnNoteListener{
 
+    private int exTypeCoins = 5, exTypePoints = 5;
     private HashMap<String, String> wordPairs = new HashMap<>();
     private ArrayList<String> arrayWords = new ArrayList<>();
+    private RecyclerView rvWordMatches;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +42,71 @@ public class WordMatchActivity extends AppCompatActivity implements WordMatchAda
 
         getData();
 
-        RecyclerView rvWordMatches = findViewById(R.id.rvWordMatches);
+        rvWordMatches = findViewById(R.id.rvWordMatches);
         WordMatchAdapter listAdapter = new WordMatchAdapter(arrayWords, getApplicationContext(), this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         rvWordMatches.addItemDecoration(new SpacesItemDecoration(15));
         rvWordMatches.setLayoutManager(layoutManager);
         rvWordMatches.setAdapter(listAdapter);
+        
+        Button btnNext = findViewById(R.id.btNext2);
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnNext.setEnabled(false);
+                checkAnswers(v);
+            }
+        });
 
+    }
+
+    private void checkAnswers(View v) {
+
+        // checkAnswers()
+        // Obtiene todos los items de la RecyclerView y comprueba si el texto introducido
+        // en los EditText de estos es igual a la palabra que debe ser la respuesta correcta
+        // Segun el resultado, la CardView de cada item cambia de color a VERDE o ROJO.
+
+        int correctAnswers = 0;
+
+        for (int i = 0; i < arrayWords.size(); i++){
+            try {
+                View itemView = rvWordMatches.getLayoutManager().findViewByPosition(i);
+                EditText rEtWordToMatch = itemView.findViewById(R.id.rEtWordToMatch);
+                rEtWordToMatch.setEnabled(false);
+                CardView rCvResult = itemView.findViewById(R.id.rCvResult);
+                String playerAnswer = rEtWordToMatch.getText().toString();
+                String correctAnswer = wordPairs.get(arrayWords.get(i));
+                if (playerAnswer.toLowerCase().equals(correctAnswer.toLowerCase())){
+                    rCvResult.setCardBackgroundColor(Color.GREEN);
+                    ExerciceActivity.totalMoney += exTypeCoins;
+                    ExerciceActivity.totalPoints += exTypePoints;
+                    correctAnswers++;
+                }else {
+                    ExerciceActivity.hasFailed = true;
+                    rCvResult.setCardBackgroundColor(Color.RED);
+                }
+
+            }catch (Exception e){
+                System.out.println("[DEBUG] - Hay algunas respuestas en blanco...");
+            }
+        }
+
+        String msg = "Palabras emparejadas correctamente: [" + correctAnswers + "/"+ arrayWords.size() + "]";
+
+        // Mostra SNACKBAR
+        Snackbar snackbar = Snackbar.make(v, msg, Snackbar.LENGTH_INDEFINITE);
+        snackbar.setAction(R.string.snack_next, new View.OnClickListener(){
+            public void onClick(View view) {
+                ExerciceActivity e = new ExerciceActivity();
+                e.nextExercice(getApplicationContext());
+                finish();
+            }
+        });
+
+        snackbar.setActionTextColor(Color.parseColor("#cb2cc6"));
+        snackbar.show();
+        
     }
 
     private void getData(){

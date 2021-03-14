@@ -24,7 +24,7 @@ import java.util.List;
 public class WordFillActivity extends AppCompatActivity {
 
     private int exTypeCoins = 15, exTypePoints = 15;
-    private String phrToComplete, answer, selectedButtonText;
+    private String phrToComplete, answer, selectedButtonText = "";
     private List<String> arrayAnswers;
     private Button btAnswer1, btAnswer2, btAnswer3, btCheck;
 
