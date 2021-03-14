@@ -22,11 +22,11 @@
 
     <TextView
         android:id="@+id/tvTitle"
-        android:layout_width="207dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/duolingo_medium"
-        android:text="Traduce esta frase: "
+        android:text="Traduce esta frase:"
         android:textAlignment="center"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/tvPhrToTranslate"
@@ -96,5 +96,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/ivTTS"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvPhrToTranslate"
+        app:layout_constraintEnd_toStartOf="@+id/tvTitle"
+        app:srcCompat="@drawable/tts_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

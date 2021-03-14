@@ -2,9 +2,11 @@ package com.duolingo.app.tasks;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +28,7 @@ public class TranslateOpenActivity extends AppCompatActivity {
     private ArrayList<String> arraySolutions = new ArrayList<>();
     private EditText etPlayerAnswer;
     private Button btCheck;
-    private boolean isCorrect = false;
+    private boolean isCorrect = false, enableTTS = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,12 @@ public class TranslateOpenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_open_trans_ex);
 
         getData();
+
+        ImageView ivTTS = findViewById(R.id.ivTTS2);
+        ivTTS.setOnClickListener(v -> initTTS());
+        if (!enableTTS){
+            ivTTS.setVisibility(View.GONE);
+        }
 
         TextView tvPhrToTranslate = findViewById(R.id.tvPhrToTranslate);
         tvPhrToTranslate.setText(phrToTranslate);
@@ -43,6 +51,9 @@ public class TranslateOpenActivity extends AppCompatActivity {
 
         btCheck = findViewById(R.id.btNext);
         btCheck.setOnClickListener(v -> checkAnswer(etPlayerAnswer.getText().toString(), v));
+    }
+
+    private void initTTS() {
     }
 
     public void getData(){
@@ -57,6 +68,10 @@ public class TranslateOpenActivity extends AppCompatActivity {
         if (getIntent().getExtras() != null){
             try {
                 Exercice exerciceObj = (Exercice) getIntent().getSerializableExtra("data");
+
+                if (exerciceObj.getIdTypeExercice().getIdTypeExercice() == 4)
+                    enableTTS = true;
+
                 JSONObject rawData = new JSONObject(exerciceObj.getContentExercice());
                 phrToTranslate = (String) rawData.get("phrToTranslate");
                 for (int i = 1; i < 100; i++){

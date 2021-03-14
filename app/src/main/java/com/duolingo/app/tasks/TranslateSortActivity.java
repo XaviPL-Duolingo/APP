@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -31,9 +33,7 @@ public class TranslateSortActivity extends AppCompatActivity {
     private String phrToTranslate, answer;
     private List<String> arrayWords;
     private Button btCheck;
-    private boolean isCorrect = false;
-    private int selectedWords = 0;
-
+    private boolean enableTTS = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,12 @@ public class TranslateSortActivity extends AppCompatActivity {
         setContentView(R.layout.activity_translate_sort);
 
         getData();
+
+        ImageView ivTTS = findViewById(R.id.ivTTS);
+        ivTTS.setOnClickListener(v -> initTTS());
+        if (!enableTTS){
+            ivTTS.setVisibility(View.GONE);
+        }
 
         TextView tvPhrToTranslate = findViewById(R.id.tvPhrToTranslate);
         tvPhrToTranslate.setText(phrToTranslate);
@@ -72,6 +78,9 @@ public class TranslateSortActivity extends AppCompatActivity {
         btCheck = findViewById(R.id.btNext);
         btCheck.setOnClickListener(v -> checkAnswer(v));
         
+    }
+
+    private void initTTS() {
     }
 
     private void checkAnswer(View v) {
@@ -149,6 +158,10 @@ public class TranslateSortActivity extends AppCompatActivity {
         if (getIntent().getExtras() != null){
             try {
                 Exercice exerciceObj = (Exercice) getIntent().getSerializableExtra("data");
+
+                if (exerciceObj.getIdTypeExercice().getIdTypeExercice() == 3)
+                    enableTTS = true;
+
                 JSONObject rawData = new JSONObject(exerciceObj.getContentExercice());
                 phrToTranslate = (String) rawData.get("phrToTranslate");
                 answer = (String) rawData.get("answer1");

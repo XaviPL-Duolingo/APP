@@ -7,6 +7,16 @@
     android:background="@drawable/backgroundapp"
     tools:context=".tasks.TranslateOpenActivity">
 
+    <ImageView
+        android:id="@+id/ivTTS2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvPhrToTranslate"
+        app:layout_constraintEnd_toStartOf="@+id/tvTitle"
+        app:srcCompat="@drawable/tts_icon" />
+
     <TextView
         android:id="@+id/tvPhrToTranslate"
         android:layout_width="308dp"
