@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,7 +12,12 @@
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="310dp"
         android:layout_height="23dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="41dp"
         android:layout_marginTop="40dp"
+        android:layout_marginEnd="42dp"
         android:progress="60"
         android:progressDrawable="@drawable/progress_exercice"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,64 +27,49 @@
 
     <TextView
         android:id="@+id/tvTitle2"
-        android:layout_width="207dp"
-        android:layout_height="29dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/progressBar3"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="75dp"
+        android:layout_marginEnd="68dp"
         android:fontFamily="@font/duolingo_medium"
-        android:text="Empareja las palabras"
+        android:text="Empareja las palabras:"
         android:textAlignment="center"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/flMatchsPairs"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar3"
-        app:layout_constraintVertical_bias="0.675" />
-
-    <com.nex3z.flowlayout.FlowLayout
-        android:id="@+id/flMatchsPairs"
-        android:layout_width="match_parent"
-        android:layout_height="175dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/answer_layout"
-        android:gravity="center"
-        app:flChildSpacing="5dp"
-        app:flRowSpacing="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/flWordsPairs"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <com.nex3z.flowlayout.FlowLayout
-        android:id="@+id/flWordsPairs"
-        android:layout_width="match_parent"
-        android:layout_height="175dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
-        android:background="@drawable/answer_layout"
-        android:gravity="center"
-        app:flChildSpacing="5dp"
-        app:flRowSpacing="5dp"
-        app:layout_constraintBottom_toTopOf="@+id/btNext2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-
-    </com.nex3z.flowlayout.FlowLayout>
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/btNext2"
         android:layout_width="320dp"
         android:layout_height="60dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="57dp"
+        android:layout_marginEnd="55dp"
         android:layout_marginBottom="100dp"
         android:background="@drawable/next_layout"
         android:fontFamily="@font/duolingo_medium"
         android:text="SIGUIENTE"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvWordMatches"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btNext2"
+        android:layout_below="@+id/tvTitle2"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/btNext2"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle2"
+        tools:layout_editor_absoluteX="147dp" />
+</RelativeLayout>

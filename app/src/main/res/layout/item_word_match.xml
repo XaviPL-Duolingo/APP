@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="#1C142E"
+    app:cardCornerRadius="30dp"
+    app:cardElevation="0dp"
+    app:contentPadding="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/rTvWordToMatch"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="0dp"
+            android:background="@drawable/next_layout"
+            android:fontFamily="@font/duolingo_medium"
+            android:gravity="center"
+            android:text="#WORD"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/rEtWordToMatch"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@+id/rCvResult"
+            android:layout_toEndOf="@+id/rTvWordToMatch"
+            android:background="@drawable/subcategory_icon_2"
+            android:fontFamily="@font/duolingo_ligth"
+            android:inputType="textPersonName"
+            android:textColor="#FFFFFF" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/rCvResult"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="0dp"
+            app:cardBackgroundColor="#27223D"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="0dp" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
