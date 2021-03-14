@@ -25,6 +25,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 public class TranslateSortActivity extends AppCompatActivity {
 
@@ -34,6 +35,7 @@ public class TranslateSortActivity extends AppCompatActivity {
     private List<String> arrayWords;
     private Button btCheck;
     private boolean enableTTS = false;
+    private TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +44,20 @@ public class TranslateSortActivity extends AppCompatActivity {
 
         getData();
 
-        ImageView ivTTS = findViewById(R.id.ivTTS);
-        ivTTS.setOnClickListener(v -> initTTS());
-        if (!enableTTS){
-            ivTTS.setVisibility(View.GONE);
-        }
+        tts = new TextToSpeech(this, status -> {
+            if (status == TextToSpeech.SUCCESS){
+                tts.setLanguage(Locale.ENGLISH);
+            }
+        });
 
         TextView tvPhrToTranslate = findViewById(R.id.tvPhrToTranslate);
         tvPhrToTranslate.setText(phrToTranslate);
+
+        ImageView ivTTS = findViewById(R.id.ivTTS);
+        ivTTS.setOnClickListener(v -> initTTS(phrToTranslate));
+        if (!enableTTS){
+            ivTTS.setVisibility(View.GONE);
+        }
 
         flAnswer = findViewById(R.id.flAnswer);
         flWords = findViewById(R.id.flWords);
@@ -80,7 +88,14 @@ public class TranslateSortActivity extends AppCompatActivity {
         
     }
 
-    private void initTTS() {
+    private void initTTS(String text) {
+        tts = new TextToSpeech(this, status -> {
+            if (status == TextToSpeech.SUCCESS){
+                tts.setLanguage(new Locale("spa", "SPA"));
+                tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+
+            }
+        });
     }
 
     private void checkAnswer(View v) {

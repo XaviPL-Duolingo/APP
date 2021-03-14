@@ -19,6 +19,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class TranslateOpenActivity extends AppCompatActivity {
 
@@ -29,6 +30,7 @@ public class TranslateOpenActivity extends AppCompatActivity {
     private EditText etPlayerAnswer;
     private Button btCheck;
     private boolean isCorrect = false, enableTTS = false;
+    private TextToSpeech tts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +39,14 @@ public class TranslateOpenActivity extends AppCompatActivity {
 
         getData();
 
+        TextView tvPhrToTranslate = findViewById(R.id.tvPhrToTranslate);
+        tvPhrToTranslate.setText(phrToTranslate);
+
         ImageView ivTTS = findViewById(R.id.ivTTS2);
-        ivTTS.setOnClickListener(v -> initTTS());
+        ivTTS.setOnClickListener(v -> initTTS(phrToTranslate));
         if (!enableTTS){
             ivTTS.setVisibility(View.GONE);
         }
-
-        TextView tvPhrToTranslate = findViewById(R.id.tvPhrToTranslate);
-        tvPhrToTranslate.setText(phrToTranslate);
 
         etPlayerAnswer = findViewById(R.id.etPlayerAnswer);
         etPlayerAnswer.setText("");
@@ -53,7 +55,14 @@ public class TranslateOpenActivity extends AppCompatActivity {
         btCheck.setOnClickListener(v -> checkAnswer(etPlayerAnswer.getText().toString(), v));
     }
 
-    private void initTTS() {
+    private void initTTS(String text) {
+        tts = new TextToSpeech(this, status -> {
+            if (status == TextToSpeech.SUCCESS){
+                tts.setLanguage(new Locale("spa", "SPA"));
+                tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+
+            }
+        });
     }
 
     public void getData(){
