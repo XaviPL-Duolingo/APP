@@ -87,16 +87,13 @@ public class TypeTestActivity extends AppCompatActivity {
         boolean isUnique = false;
 
         // Establece el texto del primer botón con una de las posibles respuestas.
+
         btAnswer1.setText(arrayAnswers[random.nextInt(3)]);
-        btAnswer1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectedButtonText = pressedButton(btAnswer1);
-            }
-        });
+        btAnswer1.setOnClickListener(v -> selectedButtonText = pressedButton(btAnswer1));
 
         // Establece el texto del segundo botón y comprueba que no tenga el mismo texto que el
         // btAnswer1
+
         while (!isUnique){
             btAnswer2.setText(arrayAnswers[random.nextInt(3)]);
             if (btAnswer2.getText().equals(btAnswer1.getText())){
@@ -106,15 +103,11 @@ public class TypeTestActivity extends AppCompatActivity {
             }
         }
 
-        btAnswer2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectedButtonText = pressedButton(btAnswer2);
-            }
-        });
+        btAnswer2.setOnClickListener(v -> selectedButtonText = pressedButton(btAnswer2));
 
         // Establece el texto del tercer botón y comprueba que su texto no coincida con niguno
         // de los 2 botones creados anteriormente.
+
         isUnique = false;
         while (!isUnique){
             btAnswer3.setText(arrayAnswers[random.nextInt(3)]);
@@ -127,12 +120,7 @@ public class TypeTestActivity extends AppCompatActivity {
             }
         }
 
-        btAnswer3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                selectedButtonText = pressedButton(btAnswer3);
-            }
-        });
+        btAnswer3.setOnClickListener(v -> selectedButtonText = pressedButton(btAnswer3));
 
     }
 
@@ -159,7 +147,7 @@ public class TypeTestActivity extends AppCompatActivity {
 
     public void checkAnswer(String selectedButtonText, final View v){
 
-        // checkAnswer
+        // checkAnswer()
         // Comprueba que el texto del botón que ha sido presionado es el mismo que el valor de
         // answer. Si coincide habilita el botón btNext y muestra una SnackBar, donde al presionar ambas
         // avanza al siguiente nivel.
@@ -172,7 +160,7 @@ public class TypeTestActivity extends AppCompatActivity {
         String msg = "";
         if (selectedButtonText.equals(answer)){
             ExerciceActivity.totalMoney += exTypeCoins;
-            ExerciceActivity.totalPoints += exTypePoints;
+            ExerciceActivity.totalXP += exTypePoints;
             msg = "OK! ";
 
         }else{
@@ -182,7 +170,7 @@ public class TypeTestActivity extends AppCompatActivity {
 
         // Si es el ultimo nivel
         if (ExerciceActivity.exIndex == ExerciceActivity.arrayExercices.size()){
-            msg = msg + "Puntos obtenidos : ["+ExerciceActivity.totalPoints+"] -- Monedas obtenidas: ["+ExerciceActivity.totalPoints+"]";
+            msg = msg + "Puntos obtenidos : ["+ExerciceActivity.totalXP +"] -- Monedas obtenidas: ["+ExerciceActivity.totalXP +"]";
             // Si hasFailed es FALSE
             if (!ExerciceActivity.hasFailed){
                 msg = msg + " [+150 BONUS]";

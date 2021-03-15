@@ -36,6 +36,8 @@ public class WordFillActivity extends AppCompatActivity {
 
         getData();
 
+        // Remplaza %WORD% en la phrToComplete por "______"
+
         TextView tvStatement = findViewById(R.id.tvStatement2);
         tvStatement.setText(phrToComplete.replace("%WORD%", "______"));
 
@@ -105,7 +107,7 @@ public class WordFillActivity extends AppCompatActivity {
 
     public void checkAnswer(String selectedButtonText, final View v){
 
-        // checkAnswer
+        // checkAnswer()
         // Comprueba que el texto del botón que ha sido presionado es el mismo que el valor de
         // answer. Si coincide habilita el botón btNext y muestra una SnackBar, donde al presionar ambas
         // avanza al siguiente nivel.
@@ -118,7 +120,7 @@ public class WordFillActivity extends AppCompatActivity {
         String msg = "";
         if (selectedButtonText.equals(answer)){
             ExerciceActivity.totalMoney += exTypeCoins;
-            ExerciceActivity.totalPoints += exTypePoints;
+            ExerciceActivity.totalXP += exTypePoints;
             msg = "OK! ";
 
         }else{
@@ -128,7 +130,7 @@ public class WordFillActivity extends AppCompatActivity {
 
         // Si es el ultimo nivel
         if (ExerciceActivity.exIndex == ExerciceActivity.arrayExercices.size()){
-            msg = msg + "Puntos obtenidos : ["+ExerciceActivity.totalPoints+"] -- Monedas obtenidas: ["+ExerciceActivity.totalPoints+"]";
+            msg = msg + "Puntos obtenidos : ["+ExerciceActivity.totalXP +"] -- Monedas obtenidas: ["+ExerciceActivity.totalXP +"]";
             // Si hasFailed es FALSE
             if (!ExerciceActivity.hasFailed){
                 msg = msg + " [+150 BONUS]";
@@ -137,12 +139,10 @@ public class WordFillActivity extends AppCompatActivity {
 
         // Mostra SNACKBAR
         Snackbar snackbar = Snackbar.make(v, msg, Snackbar.LENGTH_INDEFINITE);
-        snackbar.setAction(R.string.snack_next, new View.OnClickListener(){
-            public void onClick(View view) {
-                ExerciceActivity e = new ExerciceActivity();
-                e.nextExercice(getApplicationContext());
-                finish();
-            }
+        snackbar.setAction(R.string.snack_next, view -> {
+            ExerciceActivity e = new ExerciceActivity();
+            e.nextExercice(getApplicationContext());
+            finish();
         });
 
         snackbar.setActionTextColor(Color.parseColor("#cb2cc6"));

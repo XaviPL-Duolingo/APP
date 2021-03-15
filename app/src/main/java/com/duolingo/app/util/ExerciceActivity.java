@@ -4,11 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.duolingo.app.MainActivity;
 import com.duolingo.app.model.Category;
 import com.duolingo.app.model.Exercice;
 import com.duolingo.app.model.Level;
 import com.duolingo.app.model.TypeExercice;
+import com.duolingo.app.model.User;
 import com.duolingo.app.tasks.*;
+
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +23,7 @@ public class ExerciceActivity extends AppCompatActivity {
 
     public static ArrayList<Exercice> arrayExercices = new ArrayList<>();
     public static boolean hasFailed = false;
-    public static int totalMoney, totalPoints, exIndex = 0;
+    public static int totalMoney, totalXP, exIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,26 +92,57 @@ public class ExerciceActivity extends AppCompatActivity {
         // todas las monedas y puntos obtenidos en esta categoría a su cuenta.
 
         System.out.println("[DEBUG] - ADDED: "+totalMoney + " MONEY");
-        System.out.println("[DEBUG] - ADDED: "+totalPoints + " POINTS");
+        System.out.println("[DEBUG] - ADDED: "+ totalXP + " POINTS");
 
         if (!hasFailed){
-            // Data.userMoney += 150;
+            totalMoney += 150;
             System.out.println(hasFailed + " + 150");
         }
 
+        updateStats();
 
         // Reset de variables estaticas.
         arrayExercices.clear();
         exIndex = 0;
         hasFailed = false;
-        totalPoints = 0;
+        totalXP = 0;
         totalMoney = 0;
 
+        MainActivity.updateData();
         finish();
 
     }
 
     private void updateStats(){
+
+        // Añadir el dinero al usuario obtenido
+        int userMoney = Data.userData.getMoney();
+        Data.userData.setMoney(userMoney + totalMoney);
+
+        // Añadir la XP al usuario obtenida
+        int userPoints = Data.userData.getXp();
+        Data.userData.setXp((userPoints + totalXP));
+
+        // Añadir ELO al usuario, este será la mitad de la XP
+        int userELO = Data.userData.getElo();
+        Data.userData.setElo(userELO + (totalXP / 2));
+
+        try {
+            JSONObject parsedJSON = Data.userData.toJSON();
+            ServerConn serverConn = (ServerConn) new ServerConn("updateUser", parsedJSON.toString());
+            boolean updated = (boolean) serverConn.returnObject();
+            if (updated){
+                System.out.println("[DEBUG] - Usuario actualizado en la DB correctamente!");
+            }else {
+                System.out.println("[DEBUG] - Error al actualizar en la DB...");
+                Data.userData.setMoney(userMoney);
+                Data.userData.setXp((userPoints));
+                Data.userData.setElo(userELO);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
 

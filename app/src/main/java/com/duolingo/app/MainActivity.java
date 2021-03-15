@@ -21,6 +21,7 @@ import java.io.File;
 public class MainActivity extends AppCompatActivity {
 
     public static final String secretKey = "ssshhhhhhhhhhh!!!!";
+    public static TextView tvMoney, tvElo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView tvMoney = findViewById(R.id.tvMoney);
-        TextView tvElo = findViewById(R.id.tvElo);
+        tvMoney = findViewById(R.id.tvMoney);
+        tvElo = findViewById(R.id.tvElo);
 
         if (Data.hasConnection){
             tvMoney.setText(Integer.toString(Data.userData.getMoney()));
@@ -90,8 +91,12 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
 
+    public static void updateData(){
 
+        tvMoney.setText(Integer.toString(Data.userData.getMoney()));
+        tvElo.setText(Integer.toString(Data.userData.getElo()));
 
     }
 

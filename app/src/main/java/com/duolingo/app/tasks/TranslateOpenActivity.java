@@ -42,6 +42,10 @@ public class TranslateOpenActivity extends AppCompatActivity {
         TextView tvPhrToTranslate = findViewById(R.id.tvPhrToTranslate);
         tvPhrToTranslate.setText(phrToTranslate);
 
+        // Si idTypeExercice no es == 4 no se habilita la opcion para activar TTS
+        // Esto se hace ya que son el mismo tipo de ejercicio, solo que uno tiene TTS habilitado
+        // y el otro no.
+
         ImageView ivTTS = findViewById(R.id.ivTTS2);
         ivTTS.setOnClickListener(v -> initTTS(phrToTranslate));
         if (!enableTTS){
@@ -56,6 +60,10 @@ public class TranslateOpenActivity extends AppCompatActivity {
     }
 
     private void initTTS(String text) {
+
+        // initTTS()
+        // Crea un nuevo motor TTS con idioma CASTELLANO y lee el valor de "phrToTranslate"
+
         tts = new TextToSpeech(this, status -> {
             if (status == TextToSpeech.SUCCESS){
                 tts.setLanguage(new Locale("spa", "SPA"));
@@ -115,7 +123,7 @@ public class TranslateOpenActivity extends AppCompatActivity {
 
         // Si esta OK o dona ERROR.
         if (isCorrect){
-            ExerciceActivity.totalPoints += exTypePoints;
+            ExerciceActivity.totalXP += exTypePoints;
             ExerciceActivity.totalMoney += exTypeCoins;
             msg = "OK! ";
 
@@ -126,7 +134,7 @@ public class TranslateOpenActivity extends AppCompatActivity {
 
         // Si es el ultimo nivel
         if (ExerciceActivity.exIndex == ExerciceActivity.arrayExercices.size()){
-            msg = msg + "Puntos obtenidos : ["+ExerciceActivity.totalPoints+"] -- Monedas obtenidas: ["+ExerciceActivity.totalPoints+"]";
+            msg = msg + "Puntos obtenidos : ["+ExerciceActivity.totalXP +"] -- Monedas obtenidas: ["+ExerciceActivity.totalXP +"]";
             // Si hasFailed es FALSE
             if (!ExerciceActivity.hasFailed){
                 msg = msg + " [+150 BONUS]";

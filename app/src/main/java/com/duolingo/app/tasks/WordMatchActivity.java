@@ -11,10 +11,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.duolingo.app.R;
-import com.duolingo.app.adapter.RankingAdapter;
 import com.duolingo.app.adapter.SpacesItemDecoration;
 import com.duolingo.app.adapter.WordMatchAdapter;
 import com.duolingo.app.model.Exercice;
@@ -26,7 +24,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class WordMatchActivity extends AppCompatActivity implements WordMatchAdapter.OnNoteListener{
 
@@ -80,7 +77,7 @@ public class WordMatchActivity extends AppCompatActivity implements WordMatchAda
                 if (playerAnswer.toLowerCase().equals(correctAnswer.toLowerCase())){
                     rCvResult.setCardBackgroundColor(Color.GREEN);
                     ExerciceActivity.totalMoney += exTypeCoins;
-                    ExerciceActivity.totalPoints += exTypePoints;
+                    ExerciceActivity.totalXP += exTypePoints;
                     correctAnswers++;
                 }else {
                     ExerciceActivity.hasFailed = true;
