@@ -69,32 +69,26 @@ public class BotigaFragment extends Fragment implements StoreAdapter.OnNoteListe
         builder.setTitle("BuholingoAPP");
         builder.setMessage("¿Deseas aquirir [" + itemList.get(position).getNameItem() + "] por: " + itemList.get(position).getPriceItem() + "$?");
 
-        builder.setPositiveButton("SI", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (Data.userData.getMoney() > itemList.get(position).getPriceItem()){
-                    try {
-                        ServerConn serverConn = (ServerConn) new ServerConn("buyItem", Data.userData.getIdUser(), itemList.get(position).getIdItem());
-                        boolean success = (boolean) serverConn.returnObject();
-                        if (success){
-                            Toast.makeText(getContext(), "Compra realizada con éxito!...", Toast.LENGTH_SHORT).show();
-                            getActivity().recreate();
-                        }
-                    } catch (IOException e) {
-                        Toast.makeText(getContext(), "Ha surgido un error al realizar la compra... Abortando...", Toast.LENGTH_SHORT).show();
-                        e.printStackTrace();
+        builder.setPositiveButton("SI", (DialogInterface.OnClickListener) (dialog, which) -> {
+            if (Data.userData.getMoney() > itemList.get(position).getPriceItem()){
+                try {
+                    ServerConn serverConn = (ServerConn) new ServerConn("buyItem", Data.userData.getIdUser(), itemList.get(position).getIdItem());
+                    boolean success = (boolean) serverConn.returnObject();
+                    if (success){
+                        Toast.makeText(getContext(), "Compra realizada con éxito!...", Toast.LENGTH_SHORT).show();
+                        getActivity().recreate();
                     }
-                }else {
-                    Toast.makeText(getContext(), "No tienes suficientes monedas...", Toast.LENGTH_SHORT).show();
+                } catch (IOException e) {
+                    Toast.makeText(getContext(), "Ha surgido un error al realizar la compra... Abortando...", Toast.LENGTH_SHORT).show();
+                    e.printStackTrace();
                 }
+            }else {
+                Toast.makeText(getContext(), "No tienes suficientes monedas...", Toast.LENGTH_SHORT).show();
             }
         });
 
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        builder.setNegativeButton("NO", (dialog, which) -> {
 
-            }
         });
 
         AlertDialog dialog = builder.create();

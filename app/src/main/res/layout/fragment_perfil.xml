@@ -263,20 +263,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/tagSettings" />
 
                 <Button
-                    android:id="@+id/btnStats"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:background="@drawable/subcategory_icon"
-                    android:fontFamily="@font/duolingo_medium"
-                    android:text="TUS ESTADÍSTICAS"
-                    android:textAlignment="center"
-                    android:textSize="18sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tagSettings" />
-
-                <Button
                     android:id="@+id/btnDisconnect"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -1,5 +1,6 @@
 package com.duolingo.app.ui.perfil;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.duolingo.app.MainActivity;
@@ -18,7 +22,9 @@ import com.duolingo.app.R;
 import com.duolingo.app.model.Language;
 import com.duolingo.app.util.Data;
 import com.duolingo.app.util.ServerConn;
+import com.google.android.material.snackbar.Snackbar;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.IllegalFormatCodePointException;
 import java.util.List;
@@ -34,7 +40,6 @@ public class PerfilFragment extends Fragment {
         View view;
         view = inflater.inflate(R.layout.fragment_perfil, container, false);
 
-        // TextView = userName
         tvUsername = (TextView) view.findViewById(R.id.tvUsername);
         tvXP = (TextView) view.findViewById(R.id.tvXP);
         tvRanking = (TextView) view.findViewById(R.id.tvRanking);
@@ -73,55 +78,65 @@ public class PerfilFragment extends Fragment {
         // == SETTINGS == //
 
         btnConnect = view.findViewById(R.id.btnConnect);
-        btnConnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), LoginActivity.class);
-                startActivity(intent);
-            }
+        btnConnect.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivity(intent);
         });
 
         btnChangeAvatar = view.findViewById(R.id.btnChangeAvatar);
-        btnChangeAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnChangeAvatar.setOnClickListener(v -> {
 
-            }
-        });
-
-        btnStats = view.findViewById(R.id.btnStats);
-        btnStats.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
         });
 
         btnDisconnect = view.findViewById(R.id.btnDisconnect);
-        btnDisconnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Data.hasConnection = false;
-                editor.remove("KEYID_USER");
-                editor.apply();
-                // checkConnection();
-                Intent intent = new Intent(getContext(), MainActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
+        btnDisconnect.setOnClickListener(v -> {
+            Data.userData = null;
+            Data.hasConnection = false;
+            editor.remove("KEYID_USER");
+            editor.apply();
+            Intent intent = new Intent(getContext(), MainActivity.class);
+            startActivity(intent);
+            getActivity().finish();
         });
 
-
         btnDeleteAccount = view.findViewById(R.id.btnDeleteAccount);
-        btnDeleteAccount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        btnDeleteAccount.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+            builder.setTitle("BuholingoAPP");
+            builder.setMessage("¿Estas seguro?");
+            builder.setPositiveButton("SI", (dialog, which) -> {
+               try {
+                   ServerConn serverConn = (ServerConn) new ServerConn("deleteUser", Data.userData.getIdUser());
+                   boolean isDeleted = (boolean) serverConn.returnObject();
+                   if (isDeleted){
+                       Toast.makeText(getContext(), "Cuenta eliminada correctamente!", Toast.LENGTH_LONG).show();
+                       Data.userData = null;
+                       Data.hasConnection = false;
+                       editor.remove("KEYID_USER");
+                       editor.apply();
+                       Intent intent = new Intent(getContext(), MainActivity.class);
+                       startActivity(intent);
+                   }else {
+                       Snackbar.make(getView(), "Error al eliminar tu cuenta, prueba más tarde...", Snackbar.LENGTH_LONG).show();
+                   }
+               } catch (IOException e) {
+                   Snackbar.make(getView(), "Error al eliminar tu cuenta, prueba más tarde...", Snackbar.LENGTH_LONG).show();
+                   e.printStackTrace();
+               }
+            });
+            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.cancel();
+                }
+            });
 
-            }
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
         });
 
         checkConnection();
-
 
         return view;
     }
@@ -131,7 +146,6 @@ public class PerfilFragment extends Fragment {
         if (Data.hasConnection){
             btnConnect.setVisibility(View.GONE);
             btnChangeAvatar.setVisibility(View.VISIBLE);
-            btnStats.setVisibility(View.VISIBLE);
             btnDisconnect.setVisibility(View.VISIBLE);
             btnDeleteAccount.setVisibility(View.VISIBLE);
             tvUsername.setText(Data.userData.getUsername());
@@ -140,7 +154,6 @@ public class PerfilFragment extends Fragment {
         }else {
             btnConnect.setVisibility(View.VISIBLE);
             btnChangeAvatar.setVisibility(View.GONE);
-            btnStats.setVisibility(View.GONE);
             btnDisconnect.setVisibility(View.GONE);
             btnDeleteAccount.setVisibility(View.GONE);
             tvUsername.setText("");

@@ -99,16 +99,18 @@ public class ExerciceActivity extends AppCompatActivity {
             System.out.println(hasFailed + " + 150");
         }
 
-        updateStats();
+        if (Data.hasConnection) {
+            updateStats();
+            MainActivity.updateData();
+        }
 
-        // Reset de variables estaticas.
+            // Reset de variables estaticas.
         arrayExercices.clear();
         exIndex = 0;
         hasFailed = false;
         totalXP = 0;
         totalMoney = 0;
 
-        MainActivity.updateData();
         finish();
 
     }
