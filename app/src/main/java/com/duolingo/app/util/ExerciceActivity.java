@@ -130,20 +130,21 @@ public class ExerciceActivity extends AppCompatActivity {
         try {
             JSONObject parsedJSON = Data.userData.toJSON();
             ServerConn serverConn = (ServerConn) new ServerConn("updateUser", parsedJSON.toString());
-            boolean updated = (boolean) serverConn.returnObject();
-            if (updated){
+            User backupUser = Data.userData;
+            Data.userData = (User) serverConn.returnObject();
+            if (Data.userData != null){
                 System.out.println("[DEBUG] - Usuario actualizado en la DB correctamente!");
             }else {
                 System.out.println("[DEBUG] - Error al actualizar en la DB...");
+                Data.userData = backupUser;
                 Data.userData.setMoney(userMoney);
                 Data.userData.setXp((userPoints));
                 Data.userData.setElo(userELO);
             }
         } catch (IOException e) {
+
             e.printStackTrace();
         }
-
-
     }
 
     public Level getLevel(){

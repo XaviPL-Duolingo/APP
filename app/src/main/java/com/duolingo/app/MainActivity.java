@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
         tvMoney.setText(Integer.toString(Data.userData.getMoney()));
         tvElo.setText(Integer.toString(Data.userData.getElo()));
+
         switch (Data.userData.getIdRank().getIdRank()){
             case 1:
               ivELO.setImageResource(R.drawable.rank_silver);
