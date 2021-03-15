@@ -3,6 +3,7 @@ package com.duolingo.app;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String secretKey = "ssshhhhhhhhhhh!!!!";
     public static TextView tvMoney, tvElo;
+    public static ImageView ivELO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
         tvMoney = findViewById(R.id.tvMoney);
         tvElo = findViewById(R.id.tvElo);
+        ivELO = findViewById(R.id.iconPoints);
 
         if (Data.hasConnection){
-            tvMoney.setText(Integer.toString(Data.userData.getMoney()));
-            tvElo.setText(Integer.toString(Data.userData.getElo()));
+            updateData();
         }else {
             tvMoney.setText("0");
             tvElo.setText("0");
@@ -97,6 +99,26 @@ public class MainActivity extends AppCompatActivity {
 
         tvMoney.setText(Integer.toString(Data.userData.getMoney()));
         tvElo.setText(Integer.toString(Data.userData.getElo()));
+        switch (Data.userData.getIdRank().getIdRank()){
+            case 1:
+              ivELO.setImageResource(R.drawable.rank_silver);
+              break;
+            case 2:
+                ivELO.setImageResource(R.drawable.rank_gold);
+                break;
+            case 3:
+                ivELO.setImageResource(R.drawable.rank_diamond);
+                break;
+            case 4:
+                ivELO.setImageResource(R.drawable.rank_emerald);
+                break;
+            case 5:
+                ivELO.setImageResource(R.drawable.rank_ruby);
+                break;
+            case 6:
+                ivELO.setImageResource(R.drawable.rank_obsidian);
+                break;
+        }
 
     }
 
