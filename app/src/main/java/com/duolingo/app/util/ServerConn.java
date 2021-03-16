@@ -3,6 +3,7 @@ package com.duolingo.app.util;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.net.InetSocketAddress;
 import java.net.Socket;
 
 public class ServerConn {
@@ -12,21 +13,23 @@ public class ServerConn {
     public ServerConn(String clientOption){
 
         try {
-            socket = new Socket(Data.serverIP, 25012);
+            socket = new Socket();
+            socket.connect(new InetSocketAddress(Data.serverIP, 25012), 5000);
             System.out.println("[SERVER] - Conexión establecida!");
             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
             dos.writeUTF(clientOption);
         } catch (IOException e) {
             System.out.println("[SERVER] - Imposible conectar con el servidor...");
-            e.printStackTrace();
         }
     }
 
     public ServerConn(String clientOption, int parameters){
 
         try {
-            socket = new Socket(Data.serverIP, 25012);
+            socket = new Socket();
+            socket.connect(new InetSocketAddress(Data.serverIP, 25012), 5000);
             System.out.println("[SERVER] - Conexión establecida!");
+            socket.setSoTimeout(10 * 1000);
             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
             dos.writeUTF(clientOption);
             dos.writeInt(parameters);
@@ -39,7 +42,8 @@ public class ServerConn {
     public ServerConn(String clientOption, String parameters){
 
         try {
-            socket = new Socket(Data.serverIP, 25012);
+            socket = new Socket();
+            socket.connect(new InetSocketAddress(Data.serverIP, 25012), 5000);
             System.out.println("[SERVER] - Conexión establecida!");
             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
             dos.writeUTF(clientOption);
@@ -53,7 +57,8 @@ public class ServerConn {
     public ServerConn(String clientOption, String param1, String param2, String param3, int param4){
 
         try {
-            socket = new Socket(Data.serverIP, 25012);
+            socket = new Socket();
+            socket.connect(new InetSocketAddress(Data.serverIP, 25012), 5000);
             System.out.println("[SERVER] - Conexión establecida!");
             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
             dos.writeUTF(clientOption);
@@ -73,7 +78,8 @@ public class ServerConn {
     public ServerConn(String clientOption, String param1, String param2){
 
         try {
-            socket = new Socket(Data.serverIP, 25012);
+            socket = new Socket();
+            socket.connect(new InetSocketAddress(Data.serverIP, 25012), 5000);
             System.out.println("[SERVER] - Conexión establecida!");
             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
             dos.writeUTF(clientOption);
@@ -88,7 +94,8 @@ public class ServerConn {
     public ServerConn(String clientOption, int param1, int param2){
 
         try {
-            socket = new Socket(Data.serverIP, 25012);
+            socket = new Socket();
+            socket.connect(new InetSocketAddress(Data.serverIP, 25012), 5000);
             System.out.println("[SERVER] - Conexión establecida!");
             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
             dos.writeUTF(clientOption);

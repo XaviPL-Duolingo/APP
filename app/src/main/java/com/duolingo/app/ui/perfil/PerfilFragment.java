@@ -46,7 +46,9 @@ public class PerfilFragment extends Fragment {
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("userData", this.getActivity().getApplicationContext().MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        getAllLanguages();
+        if (Data.hasConnection)
+            getAllLanguages();
+
         Spinner spnLanguages = (Spinner) view.findViewById(R.id.spnLanguages);
         ArrayAdapter<Language> adapter = new ArrayAdapter<Language>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, languageArrayList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
