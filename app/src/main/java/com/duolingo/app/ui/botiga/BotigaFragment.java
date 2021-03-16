@@ -66,7 +66,7 @@ public class BotigaFragment extends Fragment implements StoreAdapter.OnNoteListe
         builder.setTitle("BuholingoAPP");
         builder.setMessage("¿Deseas aquirir [" + itemList.get(position).getNameItem() + "] por: " + itemList.get(position).getPriceItem() + "$?");
 
-        builder.setPositiveButton("SI", (DialogInterface.OnClickListener) (dialog, which) -> {
+        builder.setPositiveButton("SI", (dialog, which) -> {
             if (Data.userData.getMoney() > itemList.get(position).getPriceItem()){
                 try {
                     ServerConn serverConn = (ServerConn) new ServerConn("buyItem", Data.userData.getIdUser(), itemList.get(position).getIdItem());

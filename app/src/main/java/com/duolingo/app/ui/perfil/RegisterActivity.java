@@ -32,20 +32,12 @@ public class RegisterActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
 
         final Button btnRegister = findViewById(R.id.btnRegister);
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkData();
-            }
-        });
+        btnRegister.setOnClickListener(v -> checkData());
 
         final Button btnLogin = findViewById(R.id.btnGotoLogin);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gotoLogin();
-                finish();
-            }
+        btnLogin.setOnClickListener(v -> {
+            gotoLogin();
+            finish();
         });
 
     }

@@ -1,9 +1,12 @@
 package com.duolingo.app.util;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.duolingo.app.MainActivity;
@@ -96,28 +99,36 @@ public class ExerciceActivity extends AppCompatActivity {
         // todos los ejercicios a la primera se le otorga una recompensa extra de 150, además de sumar
         // todas las monedas y puntos obtenidos en esta categoría a su cuenta.
 
-        System.out.println("[DEBUG] - ADDED: "+totalMoney + " MONEY");
-        System.out.println("[DEBUG] - ADDED: "+ totalXP + " POINTS");
+        if (exIndex > 0){
+            System.out.println("[DEBUG] - ADDED: "+totalMoney + " MONEY");
+            System.out.println("[DEBUG] - ADDED: "+ totalXP + " POINTS");
 
-        if (!hasFailed){
-            totalMoney += 150;
-            System.out.println(hasFailed + " + 150");
+            if (!hasFailed){
+                totalMoney += 150;
+                System.out.println(hasFailed + " + 150");
+            }
+
+            if (Data.hasConnection) {
+                updateStats();
+                MainActivity.updateData();
+            }
+
+            clearData();
+            finish();
         }
 
-        if (Data.hasConnection) {
-            updateStats();
-            MainActivity.updateData();
-        }
+    }
 
-            // Reset de variables estaticas.
+    public static void clearData() {
+
+        // clearData()
+        // Limpiar variables estaticas del LEVEL.
+
         arrayExercices.clear();
         exIndex = 0;
         hasFailed = false;
         totalXP = 0;
         totalMoney = 0;
-
-        finish();
-
     }
 
     private void updateStats(){
@@ -193,4 +204,6 @@ public class ExerciceActivity extends AppCompatActivity {
         }
 
     }
+
+
 }

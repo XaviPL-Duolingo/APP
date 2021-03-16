@@ -32,7 +32,7 @@ public class PerfilFragment extends Fragment {
 
     private TextView tvUsername, tvXP, tvRanking;
     private ArrayList<Language> languageArrayList = new ArrayList<>();
-    private Button btnConnect, btnChangeAvatar, btnStats, btnDisconnect, btnDeleteAccount;
+    private Button btnConnect, btnChangeAvatar, btnDisconnect, btnDeleteAccount;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -125,12 +125,7 @@ public class PerfilFragment extends Fragment {
                    e.printStackTrace();
                }
             });
-            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    dialog.cancel();
-                }
-            });
+            builder.setNegativeButton("NO", (dialog, which) -> dialog.cancel());
 
             AlertDialog dialog = builder.create();
             dialog.show();

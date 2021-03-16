@@ -2,11 +2,13 @@ package com.duolingo.app.tasks;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -130,6 +132,26 @@ public class WordMatchActivity extends AppCompatActivity implements WordMatchAda
                 System.out.println("[DEBUG] - Todas las parejas obtenidas!");
             }
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.TranslucentStatusBar));
+        builder.setTitle("BuholingoAPP");
+        builder.setMessage("¿Estas seguro que quieres abandonar el ejercicio? Perderas todas las recompensas obtenidas en este");
+        builder.setNegativeButton("NO", (dialog, which) -> dialog.cancel());
+        builder.setPositiveButton("SI", (dialog, which) -> {
+            try {
+                ExerciceActivity.clearData();
+                finish();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override

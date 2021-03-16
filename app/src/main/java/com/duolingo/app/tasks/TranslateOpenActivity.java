@@ -3,6 +3,7 @@ package com.duolingo.app.tasks;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.duolingo.app.R;
@@ -164,12 +166,23 @@ public class TranslateOpenActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
+    public void onBackPressed(){
 
-        // onBackPressed()
-        // Al presionar el boton BACK, reemplaza su accion original por NO hacer nada
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.TranslucentStatusBar));
+        builder.setTitle("BuholingoAPP");
+        builder.setMessage("¿Estas seguro que quieres abandonar el ejercicio? Perderas todas las recompensas obtenidas en este");
+        builder.setNegativeButton("NO", (dialog, which) -> dialog.cancel());
+        builder.setPositiveButton("SI", (dialog, which) -> {
+            try {
+                ExerciceActivity.clearData();
+                finish();
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
+        });
 
-        return;
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 }
