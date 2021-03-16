@@ -3,7 +3,6 @@ package com.duolingo.app.util;
 import com.duolingo.app.model.Course;
 import com.duolingo.app.model.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Data {

@@ -1,13 +1,8 @@
 package com.duolingo.app.util;
 
-import android.os.AsyncTask;
-
-import com.duolingo.app.model.User;
-
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class ServerConn {

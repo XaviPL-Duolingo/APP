@@ -6,7 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.duolingo.app.R;
 import com.duolingo.app.model.Exercice;
 import com.duolingo.app.util.ExerciceActivity;

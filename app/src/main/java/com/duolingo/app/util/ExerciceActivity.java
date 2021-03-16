@@ -3,6 +3,7 @@ package com.duolingo.app.util;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.duolingo.app.MainActivity;
@@ -11,7 +12,11 @@ import com.duolingo.app.model.Exercice;
 import com.duolingo.app.model.Level;
 import com.duolingo.app.model.TypeExercice;
 import com.duolingo.app.model.User;
-import com.duolingo.app.tasks.*;
+import com.duolingo.app.tasks.TranslateOpenActivity;
+import com.duolingo.app.tasks.TranslateSortActivity;
+import com.duolingo.app.tasks.TypeTestActivity;
+import com.duolingo.app.tasks.WordFillActivity;
+import com.duolingo.app.tasks.WordMatchActivity;
 
 import org.json.JSONObject;
 

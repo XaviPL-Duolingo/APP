@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.duolingo.app.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class WordMatchAdapter extends RecyclerView.Adapter<com.duolingo.app.adapter.WordMatchAdapter.ViewHolder>{
 

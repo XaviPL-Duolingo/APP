@@ -9,17 +9,14 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.duolingo.app.R;
-import com.duolingo.app.adapter.RankingAdapter;
 import com.duolingo.app.adapter.SpacesItemDecoration;
 import com.duolingo.app.adapter.StoreAdapter;
 import com.duolingo.app.model.Item;
-import com.duolingo.app.model.User;
 import com.duolingo.app.util.Data;
 import com.duolingo.app.util.ServerConn;
 

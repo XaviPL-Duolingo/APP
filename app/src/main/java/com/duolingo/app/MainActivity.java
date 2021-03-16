@@ -17,8 +17,6 @@ import com.duolingo.app.util.Data;
 import com.duolingo.app.util.ServerConn;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.io.File;
-
 public class MainActivity extends AppCompatActivity {
 
     public static final String secretKey = "ssshhhhhhhhhhh!!!!";

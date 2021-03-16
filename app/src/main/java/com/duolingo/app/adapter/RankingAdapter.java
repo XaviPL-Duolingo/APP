@@ -9,8 +9,10 @@ import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.duolingo.app.R;
 import com.duolingo.app.model.User;
+
 import java.util.List;
 
 public class RankingAdapter extends RecyclerView.Adapter<com.duolingo.app.adapter.RankingAdapter.ViewHolder>{

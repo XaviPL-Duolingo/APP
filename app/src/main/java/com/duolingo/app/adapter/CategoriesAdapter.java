@@ -7,10 +7,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.duolingo.app.R;
 import com.duolingo.app.model.Category;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<com.duolingo.app.adapter.CategoriesAdapter.ViewHolder> {
