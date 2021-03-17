@@ -200,7 +200,7 @@ public class ExerciceActivity extends AppCompatActivity {
                 arrayExercices.addAll(exerciceList);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("[DEBUG] - Error al obtener LEVEL / No hay LEVELS para esta CATEGORY...");
         }
 
     }
