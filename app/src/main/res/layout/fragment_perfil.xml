@@ -49,6 +49,7 @@
 
                         <ImageView
                             android:id="@+id/ivAvatar"
+                            android:scaleType="centerCrop"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             tools:src="@drawable/username_icon" />

@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +38,7 @@ import java.util.List;
 public class PerfilFragment extends Fragment {
 
     private TextView tvUsername, tvXP, tvRanking;
+    private ImageView ivAvatar;
     private ArrayList<Language> languageArrayList = new ArrayList<>();
     private Button btnConnect, btnChangeAvatar, btnDisconnect, btnDeleteAccount;
     public static ArrayList<Bitmap> arrayFlags;
@@ -46,6 +48,7 @@ public class PerfilFragment extends Fragment {
         View view;
         view = inflater.inflate(R.layout.fragment_perfil, container, false);
 
+        ivAvatar = (ImageView) view.findViewById(R.id.ivAvatar);
         tvUsername = (TextView) view.findViewById(R.id.tvUsername);
         tvXP = (TextView) view.findViewById(R.id.tvXP);
         tvRanking = (TextView) view.findViewById(R.id.tvRanking);
@@ -154,6 +157,17 @@ public class PerfilFragment extends Fragment {
             tvUsername.setText(Data.userData.getUsername());
             tvXP.setText(Data.userData.getXp() + "XP");
             tvRanking.setText(Data.userData.getIdRank().getNameRank().toUpperCase());
+
+            try {
+                URL newurl = new URL(Data.userData.getAvatar());
+                Bitmap mIcon_val = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
+                ivAvatar.setImageBitmap(mIcon_val);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }else {
             btnConnect.setVisibility(View.VISIBLE);
             btnChangeAvatar.setVisibility(View.GONE);
@@ -162,6 +176,7 @@ public class PerfilFragment extends Fragment {
             tvUsername.setText("");
             tvXP.setText("");
             tvRanking.setText("");
+            ivAvatar.setImageBitmap(null);
         }
     }
 
