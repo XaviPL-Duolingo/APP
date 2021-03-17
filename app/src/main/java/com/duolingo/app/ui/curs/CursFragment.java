@@ -2,6 +2,7 @@ package com.duolingo.app.ui.curs;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,7 +64,17 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
         // usar ArrayAdapter, habra que usar ClickAdapater [Esta en la guía oficial])
 
         spnSelectedCourses  = (Spinner) view.findViewById(R.id.spnSelectedCourses);
-        ArrayAdapter<Course> adapter = new ArrayAdapter<Course>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, Data.listCourses);
+        ArrayAdapter<Course> adapter = new ArrayAdapter<Course>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, Data.listCourses){
+            public View getView(int position, View convertView,ViewGroup parent) {
+
+                View v = super.getView(position, convertView, parent);
+                ((TextView) v).setTextAppearance(R.style.SpinnerStyle);
+
+                return v;
+
+            }
+        };
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnSelectedCourses.setAdapter(adapter);
         updateCategories();

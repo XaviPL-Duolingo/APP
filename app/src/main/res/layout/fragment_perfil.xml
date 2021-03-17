@@ -36,7 +36,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight=".40"
+                    android:layout_weight=".50"
                     android:orientation="vertical"
                     android:padding="15dp">
 
@@ -57,16 +57,18 @@
                     <Spinner
                         android:id="@+id/spnLanguages"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
+                        android:layout_height="40dp"
                         android:layout_marginTop="15dp"
-                        android:background="@drawable/spinner_layout"
-                        android:spinnerMode="dialog" />
+                        android:background="@drawable/spinner_layout_trans"
+                        android:dropDownWidth="wrap_content"
+                        android:gravity="center"
+                        android:spinnerMode="dropdown" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight=".60"
+                    android:layout_weight=".50"
                     android:orientation="vertical">
 
 

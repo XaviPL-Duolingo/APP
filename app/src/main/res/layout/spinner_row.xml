@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:background="@drawable/spinner_layout"
-    android:layout_width="250dp"
-    android:layout_height="75dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-
-<ImageView
-    android:id="@+id/ivFlag"
-    android:layout_marginStart="-10dp"
-    android:layout_width="100dp"
-    android:layout_height="match_parent"
-    android:src="@drawable/spn_flag"/>
-
-<TextView
-    android:id="@+id/tvLangName"
-    android:layout_width="150dp"
-    android:layout_height="50dp"
-    android:layout_marginStart="-20dp"
-    android:layout_gravity="center"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:gravity="center"
-    android:fontFamily="@font/duolingo_bold"
-    android:textAlignment="center"
-    android:textColor="#FFFFFF"
-    android:textSize="30sp"
-    android:text="Language"/>
+    android:padding="2dp"
+    android:paddingBottom="5dp">
 
+    <ImageView
+        android:id="@+id/ivFlag"
+        android:layout_width="40dp"
+        android:layout_height="25dp"
+        app:srcCompat="@drawable/fg_spanish" />
+
+    <TextView
+        android:id="@+id/tvLangName"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="5sp"
+        android:layout_weight="1"
+        android:fontFamily="@font/duolingo_medium"
+        android:gravity="top"
+        android:text="SPA"
+        android:textAlignment="textStart"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
 </LinearLayout>

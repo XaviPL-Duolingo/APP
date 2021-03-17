@@ -3,7 +3,10 @@ package com.duolingo.app.ui.perfil;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +22,15 @@ import androidx.fragment.app.Fragment;
 
 import com.duolingo.app.MainActivity;
 import com.duolingo.app.R;
+import com.duolingo.app.adapter.SpinnerAdapter;
 import com.duolingo.app.model.Language;
 import com.duolingo.app.util.Data;
 import com.duolingo.app.util.ServerConn;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +39,7 @@ public class PerfilFragment extends Fragment {
     private TextView tvUsername, tvXP, tvRanking;
     private ArrayList<Language> languageArrayList = new ArrayList<>();
     private Button btnConnect, btnChangeAvatar, btnDisconnect, btnDeleteAccount;
+    public static ArrayList<Bitmap> arrayFlags;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -50,7 +57,7 @@ public class PerfilFragment extends Fragment {
             getAllLanguages();
 
         Spinner spnLanguages = (Spinner) view.findViewById(R.id.spnLanguages);
-        ArrayAdapter<Language> adapter = new ArrayAdapter<Language>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, languageArrayList);
+        SpinnerAdapter adapter = new SpinnerAdapter(getContext(), languageArrayList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spnLanguages.setAdapter(adapter);
         spnLanguages.setSelection(Data.KEYID_LANG - 1);
@@ -164,10 +171,32 @@ public class PerfilFragment extends Fragment {
             ServerConn serverConn = (ServerConn) new ServerConn("getAllLanguages");
             List<Language> languageList = (List<Language>) serverConn.returnObject();
             languageArrayList.addAll(languageList);
+            if (arrayFlags == null){
+                arrayFlags = getFlags();
+            }
 
         }catch (Exception e){
             e.printStackTrace();
         }
+
+    }
+
+    private ArrayList<Bitmap> getFlags(){
+
+        arrayFlags = new ArrayList<>();
+        for (Language l : languageArrayList) {
+            try{
+                URL newurl = new URL(l.getFlagLanguage());
+                Bitmap mIcon_val = BitmapFactory.decodeStream(newurl.openConnection().getInputStream());
+                arrayFlags.add(mIcon_val);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return arrayFlags;
 
     }
 

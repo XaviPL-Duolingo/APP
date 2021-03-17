@@ -20,4 +20,9 @@
         <item name="android:indeterminateOnly">false</item>
         <item name="android:progressDrawable">@drawable/progress_category</item>
     </style>
+    <style name="SpinnerStyle" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="fontFamily">@font/duolingo_medium</item>
+    </style>
 </resources>

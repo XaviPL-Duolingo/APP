@@ -1,10 +1,13 @@
 package com.duolingo.app.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,7 +15,11 @@ import androidx.annotation.Nullable;
 
 import com.duolingo.app.R;
 import com.duolingo.app.model.Language;
+import com.duolingo.app.ui.perfil.PerfilFragment;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class SpinnerAdapter extends ArrayAdapter<Language> {
@@ -40,14 +47,14 @@ public class SpinnerAdapter extends ArrayAdapter<Language> {
             );
         }
 
-        // ImageView ivFlag = convertView.findViewById(R.id.ivFlag);
+        ImageView ivFlag = convertView.findViewById(R.id.ivFlag);
         TextView tvLangName = convertView.findViewById(R.id.tvLangName);
 
         Language currentItem = (Language) getItem(position);
 
         if (currentItem != null){
-            // ivFlag.setImageBitmap(currentItem.getFlag());
-            tvLangName.setText(currentItem.getNameLanguage());
+            ivFlag.setImageBitmap(PerfilFragment.arrayFlags.get(position));
+            tvLangName.setText(currentItem.getCodeLanguage());
         }
 
         return convertView;
