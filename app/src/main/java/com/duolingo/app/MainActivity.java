@@ -19,7 +19,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String secretKey = "ssshhhhhhhhhhh!!!!";
     public static TextView tvMoney, tvElo;
     public static ImageView ivELO;
 
@@ -94,6 +93,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void updateData(){
+
+        // updateData()
+        // Método estatico que se utiliza para actualizar los datos de la MainActivity por ejemplo
+        // al acabar un ejercicio o al realizar una compra, etc...
 
         tvMoney.setText(Integer.toString(Data.userData.getMoney()));
         tvElo.setText(Integer.toString(Data.userData.getElo()));

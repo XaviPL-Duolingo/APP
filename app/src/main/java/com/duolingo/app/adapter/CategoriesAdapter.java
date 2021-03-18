@@ -70,7 +70,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<com.duolingo.app.ada
             itemView.setOnClickListener(this);
         }
 
-        void bindData(final Category item){
+        void bindData(Category item){
             //ivPhoto.setImageBitmap(item.getImage());
             tvTitle.setText(item.getCategoryName());
             tvLevel.setText("1");

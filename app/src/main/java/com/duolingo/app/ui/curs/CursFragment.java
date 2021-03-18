@@ -34,6 +34,7 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
     private static ArrayList<String> listSelectedCourses = new ArrayList<String>();
     private List<Category> mkCategories = new ArrayList<Category>();
     private Spinner spnSelectedCourses;
+    private RecyclerView recyclerView;
     private boolean isEmpty = false;
 
     public int idCourse;
@@ -101,7 +102,7 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
 
         // RecyclerView
         // Se crea e instancia la RecyclerView, luego se crea su respectivo adapter
-        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView = view.findViewById(R.id.recyclerView);
         CategoriesAdapter listAdapter = new CategoriesAdapter(mkCategories, getActivity().getApplicationContext(), this);
 
         // Se encarga de establecer el layout de la RecyclerView de forma que vaya alternando entre 1
@@ -125,18 +126,13 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
 
     @Override
     public void onNoteClick(int position) {
+
+        // onNoteClick()
+        // Al pulsar una CATEGORY se ejecuta un Intent para ir a los EXERCICES de esa CATEGORY
+
         Intent intent = new Intent(getContext(), ExerciceActivity.class);
         intent.putExtra("category", mkCategories.get(position));
         startActivity(intent);
-    }
-
-    private ArrayAdapter<String> updateAdapter(){
-
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(getActivity().getApplicationContext(),
-                android.R.layout.simple_spinner_item, listSelectedCourses);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        return adapter2;
     }
 
     private void checkCourses(){
@@ -156,6 +152,14 @@ public class CursFragment extends Fragment implements CategoriesAdapter.OnNoteLi
     }
 
     private void updateCategories(){
+
+        // updateCategories()
+        // Limpia la RecyclerView y el ArrayList de CATEGORY, una vez limpios llama al servidor
+        // para obtener todas las CATEGORY que hayan en el COURSE seleccionado y las guarda en el
+        // ArrayList, luego se actualiza la RecyclerView.
+
+        if (recyclerView != null)
+            recyclerView.removeAllViews();
 
         mkCategories.clear();
 

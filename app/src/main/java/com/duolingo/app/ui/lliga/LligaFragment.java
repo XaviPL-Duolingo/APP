@@ -63,6 +63,10 @@ public class LligaFragment extends Fragment implements RankingAdapter.OnNoteList
 
     private List<User> getRanking() {
 
+        // getRanking()
+        // Obtiene todos los usuarios que pertenezcan a la misma categoria que el usurio cliente
+        // y muestra descendientemente su posición, sus datos y su puntuación.
+
         try {
             ServerConn serverConn = (ServerConn) new ServerConn("getRanking", Data.userData.getIdRank().getIdRank());
             List<User> rankingList = (List<User>) serverConn.returnObject();
@@ -76,6 +80,9 @@ public class LligaFragment extends Fragment implements RankingAdapter.OnNoteList
     }
 
     private void cvUserBackground(CardView cardView){
+
+        // cvUserBackground()
+        // Dependiendo del "idRank", el color de la CardView cambia segun su valor.
 
         String rank = (String) tvRankName.getText();
 

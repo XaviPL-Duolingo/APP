@@ -149,6 +149,11 @@ public class PerfilFragment extends Fragment {
 
     private void checkConnection() {
 
+        // checkConnection()
+        // Si el usuario ha contactado con el servidor correctamente se muestran diferentes
+        // datos del usuario, en caso de que no haya habido comunicación se muestran datos
+        // en blanco y diferentes opciones como poder loguearse
+
         if (Data.hasConnection){
             btnConnect.setVisibility(View.GONE);
             btnChangeAvatar.setVisibility(View.VISIBLE);
@@ -182,6 +187,9 @@ public class PerfilFragment extends Fragment {
 
     private void getAllLanguages(){
 
+        // getAllLanguages()
+        // Llama al servidor para obtener todos los idiomas posibles para el usuario
+
         try {
             ServerConn serverConn = (ServerConn) new ServerConn("getAllLanguages");
             List<Language> languageList = (List<Language>) serverConn.returnObject();
@@ -197,6 +205,12 @@ public class PerfilFragment extends Fragment {
     }
 
     private ArrayList<Bitmap> getFlags(){
+
+        // getFlags()
+        // Método que solo se ejecuta 1 vez por instancia de la aplicación, obtiene y transforma las
+        // URL de las banderas de los idiomas en Bitmap y los guarda en un ArrayList. Esto permite
+        // tener las banderas de los idiomas en el Spinner y solamente se haga 1 vez, ya que tarda mucho
+        // y produciria mucho retraso si se hiciese a la hora de generar el SPINNER.
 
         arrayFlags = new ArrayList<>();
         for (Language l : languageArrayList) {

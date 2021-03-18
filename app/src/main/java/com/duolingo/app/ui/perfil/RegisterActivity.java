@@ -44,12 +44,19 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void gotoLogin(){
 
+        // gotoLogin()
+        // Si se pulsa btnGotoLogin se intenta abrir su activity correspondiente.
+
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
 
     }
 
     private void checkData(){
+
+        // checkData()
+        // Métodod de verificacion de los datos introducidos por el usuario, si hay algun problema
+        // avisa al usuario de ello, si todos son validos entonces ejecuta registerUser()
 
         String username = etUsername.getText().toString();
         String email = etEmail.getText().toString();
@@ -64,6 +71,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void registerUser(String username, String email, String password){
+
+        // registerUser()
+        // Llama al servidor para realizar una peticion de registro con los datos del usuario
+        // Si el registro es correcto se guarda su KEYID_USER y se habilita el modo online
 
         try {
             ServerConn serverConn = (ServerConn) new ServerConn("registerUser", username, email, password, Data.KEYID_LANG);

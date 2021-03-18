@@ -47,6 +47,11 @@ public class BotigaFragment extends Fragment implements StoreAdapter.OnNoteListe
 
     private List<Item> getItems() {
 
+        // getItems()
+        // Obtiene todos los ITEMS disponibles para comprar por el ususario.
+
+        // ** FALTA CAMBIAR SU FUNCIONAMIENTO!
+
         try {
             ServerConn serverConn = (ServerConn) new ServerConn("getItems");
             List<Item> rankingList = (List<Item>) serverConn.returnObject();
@@ -61,6 +66,10 @@ public class BotigaFragment extends Fragment implements StoreAdapter.OnNoteListe
 
     @Override
     public void onNoteClick(int position) {
+
+        // onNoteClick()
+        // Se ejecuta al pulsar en un ITEM de la tienda y realiza todas las consultas y verificaciones
+        // previas a la compra, si esta se puede realizar llama al servidor para confirmar la compra.
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("BuholingoAPP");
