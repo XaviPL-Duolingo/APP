@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
         getPreferences();
 
-        // -- HACERLO CON ALGUN THREAD Y LUEGO JOIN PARA QUE ESPERE
-
         setTheme(R.style.TranslucentStatusBar);     // Fin Splash-Screen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -86,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 Data.userData = (User) serverConn.returnObject();
 
             }catch (Exception e){
+                Data.hasConnection = false;
                 System.out.println("[SERVER] - Error al obtener datos del servidor...");
                 e.printStackTrace();
             }

@@ -31,7 +31,7 @@ public class ExerciceActivity extends AppCompatActivity {
 
     public static ArrayList<Exercice> arrayExercices = new ArrayList<>();
     public static boolean hasFailed = false;
-    public static int totalMoney, totalXP, exIndex = 0;
+    public static int totalMoney, totalXP, exIndex = 0, idLevel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,19 +146,28 @@ public class ExerciceActivity extends AppCompatActivity {
         Data.userData.setElo(userELO + (totalXP / 2));
 
         try {
-            JSONObject parsedJSON = Data.userData.toJSON();
-            ServerConn serverConn = (ServerConn) new ServerConn("updateUser", parsedJSON.toString());
             User backupUser = Data.userData;
+            ServerConn serverConn = new ServerConn("completeLevel", Data.userData.getIdUser(), idLevel);
             Data.userData = (User) serverConn.returnObject();
             if (Data.userData != null){
-                System.out.println("[DEBUG] - Usuario actualizado en la DB correctamente!");
+                backupUser = Data.userData;
+                JSONObject parsedJSON = Data.userData.toJSON();
+                serverConn = (ServerConn) new ServerConn("updateUser", parsedJSON.toString());
+                Data.userData = (User) serverConn.returnObject();
+                if (Data.userData != null){
+                    System.out.println("[DEBUG] - Usuario actualizado en la DB correctamente!");
+                }else {
+                    System.out.println("[DEBUG] - Error al actualizar en la DB...");
+                    Data.userData = backupUser;
+                    Data.userData.setMoney(userMoney);
+                    Data.userData.setXp((userPoints));
+                    Data.userData.setElo(userELO);
+                }
             }else {
-                System.out.println("[DEBUG] - Error al actualizar en la DB...");
                 Data.userData = backupUser;
-                Data.userData.setMoney(userMoney);
-                Data.userData.setXp((userPoints));
-                Data.userData.setElo(userELO);
+                System.out.println("[DEBUG] - Fallo al conectar con el servidor... Abortando...");
             }
+
         } catch (IOException e) {
 
             e.printStackTrace();
@@ -194,6 +203,7 @@ public class ExerciceActivity extends AppCompatActivity {
 
         try {
             Level levelObj = getLevel();
+            idLevel = levelObj.getIdLevel();
             if (levelObj != null){
                 ServerConn serverConn = (ServerConn) new ServerConn("getExercices", levelObj.getIdLevel());
                 List<Exercice> exerciceList = (List<Exercice>) serverConn.returnObject();
