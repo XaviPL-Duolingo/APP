@@ -1,5 +1,6 @@
 # BUHOLINGO | APP
-Repositorio de la parte "CLIENTE" del proyecto Buholingo. Aplicación para plataformas ANDROID desde donde el usuario puede aprender idiomas mientras hace diferentes ejercicios hasta 12 diferentes IDIOMAS para escoger y un máximo de 132 CURSOS (actualmente implementados, pueden ser más), variedad de CATEGORIAS por curso y diferentes NIVELES de dificultad por categoría. Implementados actualmente 7 TIPOS de EJERCICIOS con sus diferentes LAYOUTS y puntuaciones.
+Repositorio de la parte "CLIENTE" del proyecto Buholingo. <br>
+Aplicación para plataformas ANDROID desde donde el usuario puede aprender idiomas mientras hace diferentes ejercicios hasta 12 diferentes IDIOMAS para escoger y un máximo de 132 CURSOS (actualmente implementados, pueden ser más), variedad de CATEGORIAS por curso y diferentes NIVELES de dificultad por categoría. Implementados actualmente 7 TIPOS de EJERCICIOS con sus diferentes LAYOUTS y puntuaciones.
 
 ## SPECS:
 - Conexión con SERVER DESKTOP mediante ServerSocket
