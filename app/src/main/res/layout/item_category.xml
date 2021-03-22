@@ -55,7 +55,7 @@
                 android:layout_height="50dp"
                 android:layout_below="@+id/rIvCrown"
                 android:layout_marginLeft="100dp"
-                android:layout_marginTop="-48dp"
+                android:layout_marginTop="-45dp"
                 android:fontFamily="@font/duolingo_black"
                 android:gravity="center"
                 android:text="1"

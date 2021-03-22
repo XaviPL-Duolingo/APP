@@ -156,6 +156,7 @@ public class ExerciceActivity extends AppCompatActivity {
                 Data.userData = (User) serverConn.returnObject();
                 if (Data.userData != null){
                     System.out.println("[DEBUG] - Usuario actualizado en la DB correctamente!");
+
                 }else {
                     System.out.println("[DEBUG] - Error al actualizar en la DB...");
                     Data.userData = backupUser;

@@ -1,6 +1,7 @@
 package com.duolingo.app.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.duolingo.app.R;
 import com.duolingo.app.model.Category;
+import com.duolingo.app.util.Data;
+import com.duolingo.app.util.ServerConn;
 
+import java.io.IOException;
 import java.util.List;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<com.duolingo.app.adapter.CategoriesAdapter.ViewHolder> {
@@ -73,14 +77,34 @@ public class CategoriesAdapter extends RecyclerView.Adapter<com.duolingo.app.ada
         void bindData(Category item){
             //ivPhoto.setImageBitmap(item.getImage());
             tvTitle.setText(item.getCategoryName());
-            tvLevel.setText("1");
+            int progress = getProgress(item);
             if (item.getLevels().size() > 0){
                 progressBar.setMax(item.getLevels().size());
-                progressBar.setProgress(0);
+                progressBar.setProgress(progress);
+
+                if (item.getLevels().size() <= progress)
+                    tvLevel.setText("MAX");
+                else tvLevel.setText(Integer.toString(progress+1));
+
             }else {
+                tvLevel.setText("0");
                 progressBar.setMax(item.getLevels().size() + 1);
                 progressBar.setProgress(1);
             }
+        }
+
+        private int getProgress(Category item){
+
+            try{
+                ServerConn serverConn = new ServerConn("getUserProgressOnCategory", Data.userData.getIdUser(), item.getIdCategory());
+                int result  = (int) serverConn.returnObject();
+                return result;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return 0;
+
         }
 
         @Override
