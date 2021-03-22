@@ -1,4 +1,5 @@
 # BUHOLINGO | APP
+![MainFrame](https://i.ibb.co/VvzBpJx/Buholingo-Portada.jpg)
 Repositorio de la parte "CLIENTE" del proyecto Buholingo. <br>
 Aplicación para plataformas ANDROID desde donde el usuario puede aprender idiomas mientras hace diferentes ejercicios hasta 12 diferentes IDIOMAS para escoger y un máximo de 132 CURSOS (actualmente implementados, pueden ser más), variedad de CATEGORIAS por curso y diferentes NIVELES de dificultad por categoría. Implementados actualmente 7 TIPOS de EJERCICIOS con sus diferentes LAYOUTS y puntuaciones.
 
@@ -33,3 +34,11 @@ Aplicación para plataformas ANDROID desde donde el usuario puede aprender idiom
 - Diferentes ligas y rangos, con diferentes puntuaciones de corte (EX: DIAMOND: 20000 ELO)
 - Implementación de TIENDA con ITEMS y VENTAJAS
 - Modo OFFLINE y modo SIN CONEXION.
+
+
+## IMAGENES:
+![MainActivity](https://i.ibb.co/w7bqJpJ/Buholingo-Main.png)
+![Ejercicios](https://i.ibb.co/0B0BBgM/Ejercicios.png)
+![LoginRegistro](https://i.ibb.co/k8z27cw/Login-Registro.png)
+![Perfil](https://i.ibb.co/hMpbsn6/Perfil.png)
+![Ranking](https://i.ibb.co/s3cBb4w/Ranking.png)
