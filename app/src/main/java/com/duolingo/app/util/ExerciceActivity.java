@@ -204,8 +204,8 @@ public class ExerciceActivity extends AppCompatActivity {
 
         try {
             Level levelObj = getLevel();
-            idLevel = levelObj.getIdLevel();
             if (levelObj != null){
+                idLevel = levelObj.getIdLevel();
                 ServerConn serverConn = (ServerConn) new ServerConn("getExercices", levelObj.getIdLevel());
                 List<Exercice> exerciceList = (List<Exercice>) serverConn.returnObject();
                 arrayExercices.addAll(exerciceList);

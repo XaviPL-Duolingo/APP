@@ -95,12 +95,14 @@ public class CategoriesAdapter extends RecyclerView.Adapter<com.duolingo.app.ada
 
         private int getProgress(Category item){
 
-            try{
-                ServerConn serverConn = new ServerConn("getUserProgressOnCategory", Data.userData.getIdUser(), item.getIdCategory());
-                int result  = (int) serverConn.returnObject();
-                return result;
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (Data.hasConnection){
+                try{
+                    ServerConn serverConn = new ServerConn("getUserProgressOnCategory", Data.userData.getIdUser(), item.getIdCategory());
+                    int result  = (int) serverConn.returnObject();
+                    return result;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
             return 0;
