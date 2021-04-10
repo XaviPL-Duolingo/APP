@@ -41,4 +41,3 @@ Aplicación para plataformas ANDROID desde donde el usuario puede aprender idiom
 ![Ejercicios](https://i.ibb.co/0B0BBgM/Ejercicios.png)
 ![LoginRegistro](https://i.ibb.co/k8z27cw/Login-Registro.png)
 ![Perfil](https://i.ibb.co/hMpbsn6/Perfil.png)
-![Ranking](https://i.ibb.co/s3cBb4w/Ranking.png)
